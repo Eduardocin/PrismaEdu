@@ -1,0 +1,11 @@
+# LLM
+google-generativeai>=0.7.0
+
+# Interface
+gradio>=4.0.0
+
+# Utilitários
+python-dotenv>=1.0.0
+
+# Testes
+pytest>=8.0.0
