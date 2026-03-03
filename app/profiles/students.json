@@ -1,0 +1,40 @@
+{
+  "students": [
+    {
+      "id": "student_001",
+      "nome": "Ana Beatriz",
+      "idade": 14,
+      "nivel": "iniciante",
+      "estilo_aprendizado": "visual",
+      "interesses": ["arte", "biologia"],
+      "descricao": "Aprende melhor com diagramas, ilustrações e representações gráficas. Tem dificuldade com textos longos sem apoio visual."
+    },
+    {
+      "id": "student_002",
+      "nome": "Carlos Eduardo",
+      "idade": 17,
+      "nivel": "intermediário",
+      "estilo_aprendizado": "leitura-escrita",
+      "interesses": ["história", "filosofia"],
+      "descricao": "Prefere aprender por meio de textos detalhados, anotações e listas. Gosta de resumir o conteúdo com suas próprias palavras."
+    },
+    {
+      "id": "student_003",
+      "nome": "Larissa Mendes",
+      "idade": 19,
+      "nivel": "avançado",
+      "estilo_aprendizado": "auditivo",
+      "interesses": ["música", "física", "matemática"],
+      "descricao": "Assimila melhor ouvindo explicações e discussões. Beneficia-se de analogias faladas e narrativas explicativas detalhadas."
+    },
+    {
+      "id": "student_004",
+      "nome": "Pedro Alves",
+      "idade": 15,
+      "nivel": "iniciante",
+      "estilo_aprendizado": "cinestésico",
+      "interesses": ["esportes", "tecnologia"],
+      "descricao": "Aprende fazendo. Prefere exemplos práticos, experimentos e situações do mundo real. Tem dificuldade com teoria abstrata sem aplicação prática."
+    }
+  ]
+}
