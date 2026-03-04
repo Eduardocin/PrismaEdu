@@ -229,7 +229,7 @@ Aluno: {nome} | Nível: {nivel}
 
 Dê um exemplo prático de '{topic}'.
 
-Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Seja objetivo e conciso. Limite sua resposta a no máximo 800 palavras.
 Prefira listas curtas a parágrafos longos.
 O JSON de resposta deve estar sempre completo e fechado.
 ```
@@ -260,7 +260,7 @@ Agora crie um exemplo diferente sobre 'listas em Python', adaptado ao estilo cin
 {format_instruction}
 Restrição: use apenas exemplos reais e funcionais, em português do Brasil.
 
-Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Seja objetivo e conciso. Limite sua resposta a no máximo 800 palavras.
 Prefira listas curtas a parágrafos longos.
 O JSON de resposta deve estar sempre completo e fechado.
 ```

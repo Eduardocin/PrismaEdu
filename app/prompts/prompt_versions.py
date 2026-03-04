@@ -48,7 +48,7 @@ Aluno: {nome} | Nível: {nivel}
 
 Dê um exemplo prático de '{topic}'.
 
-Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
+Seja objetivo e conciso. Limite sua resposta a no máximo 800 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 EXAMPLES_V2 = """\
@@ -75,7 +75,7 @@ Agora crie um exemplo diferente sobre '{topic}', adaptado ao estilo {estilo_apre
 {format_instruction}
 Restrição: use apenas exemplos reais e funcionais, em português do Brasil.
 
-Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
+Seja objetivo e conciso. Limite sua resposta a no máximo 800 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 # ─────────────────────────────────────────────────────────────────────────────
