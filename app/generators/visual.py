@@ -21,6 +21,10 @@ def generate_visual(
     Retorna VisualResponse (v2) ou dict com chave 'raw' (v1).
     """
     return run_generator(
-        profile, topic, "visual", version, temperature,
+        profile,
+        topic,
+        "visual",
+        version,
+        temperature,
         max_output_tokens=MAX_OUTPUT_TOKENS,
     )

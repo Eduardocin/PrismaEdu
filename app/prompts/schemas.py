@@ -9,14 +9,18 @@ from pydantic import BaseModel, Field
 
 class ConceptualResponse(BaseModel):
     """Schema para explicações conceituais com chain-of-thought."""
+
     definition: str = Field(description="Definição simples do conceito em 1-2 frases")
-    why_it_matters: str = Field(description="Por que este conceito é importante para o aluno")
+    why_it_matters: str = Field(
+        description="Por que este conceito é importante para o aluno"
+    )
     steps: list[str] = Field(description="Explicação passo a passo (mínimo 3 itens)")
     summary: str = Field(description="Resumo final consolidando o aprendizado")
 
 
 class ExamplesResponse(BaseModel):
     """Schema para exemplos práticos com few-shot."""
+
     context: str = Field(description="Contexto e motivação do exemplo")
     example: str = Field(description="Exemplo completo e funcional")
     explanation: list[str] = Field(description="O que cada parte do exemplo faz")
@@ -25,6 +29,7 @@ class ExamplesResponse(BaseModel):
 
 class ReflectionResponse(BaseModel):
     """Schema para perguntas de reflexão crítica."""
+
     questions: list[str] = Field(
         description="Exatamente 3 perguntas de reflexão, da mais simples à mais desafiadora",
         min_length=3,
@@ -34,7 +39,10 @@ class ReflectionResponse(BaseModel):
 
 class VisualResponse(BaseModel):
     """Schema para representação visual e analógica."""
-    analogy: str = Field(description="Analogia do cotidiano adaptada ao nível e estilo do aluno")
+
+    analogy: str = Field(
+        description="Analogia do cotidiano adaptada ao nível e estilo do aluno"
+    )
     visual_representation: str = Field(
         description="Representação textual: tabela, lista hierárquica ou diagrama ASCII"
     )
@@ -45,14 +53,16 @@ class VisualResponse(BaseModel):
 
 SCHEMA_MAP: dict[str, type[BaseModel]] = {
     "conceptual": ConceptualResponse,
-    "examples":   ExamplesResponse,
+    "examples": ExamplesResponse,
     "reflection": ReflectionResponse,
-    "visual":     VisualResponse,
+    "visual": VisualResponse,
 }
 
 
 def get_schema(content_type: str) -> type[BaseModel]:
     """Retorna o modelo Pydantic correspondente ao content_type."""
     if content_type not in SCHEMA_MAP:
-        raise ValueError(f"content_type inválido: '{content_type}'. Use: {list(SCHEMA_MAP)}")
+        raise ValueError(
+            f"content_type inválido: '{content_type}'. Use: {list(SCHEMA_MAP)}"
+        )
     return SCHEMA_MAP[content_type]

@@ -22,6 +22,10 @@ def generate_conceptual(
     Retorna ConceptualResponse (v2) ou dict com chave 'raw' (v1).
     """
     return run_generator(
-        profile, topic, "conceptual", version, temperature,
+        profile,
+        topic,
+        "conceptual",
+        version,
+        temperature,
         max_output_tokens=MAX_OUTPUT_TOKENS,
     )

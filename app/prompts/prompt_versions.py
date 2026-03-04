@@ -118,7 +118,7 @@ Restrição: use apenas analogias do cotidiano, sem termos técnicos não explic
 
 VERSIONS: dict[str, dict[str, str]] = {
     "conceptual": {"v1": CONCEPTUAL_V1, "v2": CONCEPTUAL_V2},
-    "examples":   {"v1": EXAMPLES_V1,   "v2": EXAMPLES_V2},
+    "examples": {"v1": EXAMPLES_V1, "v2": EXAMPLES_V2},
     "reflection": {"v1": REFLECTION_V1, "v2": REFLECTION_V2},
-    "visual":     {"v1": VISUAL_V1,     "v2": VISUAL_V2},
+    "visual": {"v1": VISUAL_V1, "v2": VISUAL_V2},
 }

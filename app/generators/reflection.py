@@ -22,6 +22,10 @@ def generate_reflection(
     Retorna ReflectionResponse (v2) ou dict com chave 'raw' (v1).
     """
     return run_generator(
-        profile, topic, "reflection", version, temperature,
+        profile,
+        topic,
+        "reflection",
+        version,
+        temperature,
         max_output_tokens=MAX_OUTPUT_TOKENS,
     )

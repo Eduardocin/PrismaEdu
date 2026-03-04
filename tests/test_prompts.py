@@ -4,13 +4,11 @@ Testes do Prisma — cobrindo montagem de prompts, cache e output_manager.
 """
 
 import json
-import tempfile
-from pathlib import Path
-from unittest.mock import patch
 
 import pytest
 
 # ── Fixtures compartilhadas ──────────────────────────────────────────────────
+
 
 @pytest.fixture
 def profile_fixture():
@@ -28,6 +26,7 @@ def profile_fixture():
 # ════════════════════════════════════════════════════════════════════════════
 # BLOCO 1 — Montagem do prompt
 # ════════════════════════════════════════════════════════════════════════════
+
 
 class TestPromptBuilder:
     """Verifica se build_prompt monta corretamente system e user prompt."""
@@ -67,7 +66,9 @@ class TestPromptBuilder:
         """v1 não usa system instruction — deve retornar string vazia."""
         from app.prompts.prompt_builder import build_prompt
 
-        system, _, schema = build_prompt(profile_fixture, "fotossíntese", "conceptual", "v1")
+        system, _, schema = build_prompt(
+            profile_fixture, "fotossíntese", "conceptual", "v1"
+        )
 
         assert system == "", "system instruction v1 deve ser string vazia"
         assert schema is None, "Schema v1 deve ser None"
@@ -102,6 +103,7 @@ class TestPromptBuilder:
 # BLOCO 2 — Cache (hit e miss)
 # ════════════════════════════════════════════════════════════════════════════
 
+
 class TestCache:
     """Testa o ciclo completo de cache: miss → set → hit → invalidate."""
 
@@ -109,6 +111,7 @@ class TestCache:
     def _cache_temp(self, tmp_path, monkeypatch):
         temp_cache = tmp_path / "cache.json"
         import app.services.cache as cache_module
+
         monkeypatch.setattr(cache_module, "_CACHE_FILE", temp_cache)
 
     def test_miss_retorna_none(self):
@@ -137,18 +140,26 @@ class TestCache:
         dados = {"definition": "teste"}
         cache_service.set("student_x", "fotossíntese", "conceptual", "v2", dados)
 
-        assert cache_service.get("student_x", "OUTRO_TOPICO", "conceptual", "v2") is None
-        assert cache_service.get("student_x", "fotossíntese", "conceptual", "v1") is None
+        assert (
+            cache_service.get("student_x", "OUTRO_TOPICO", "conceptual", "v2") is None
+        )
+        assert (
+            cache_service.get("student_x", "fotossíntese", "conceptual", "v1") is None
+        )
 
     def test_invalidate_remove_entrada(self):
         """invalidate deve remover a entrada e retornar True."""
         from app.services import cache as cache_service
 
         cache_service.set("student_x", "fotossíntese", "conceptual", "v2", {"k": "v"})
-        removido = cache_service.invalidate("student_x", "fotossíntese", "conceptual", "v2")
+        removido = cache_service.invalidate(
+            "student_x", "fotossíntese", "conceptual", "v2"
+        )
 
         assert removido is True
-        assert cache_service.get("student_x", "fotossíntese", "conceptual", "v2") is None
+        assert (
+            cache_service.get("student_x", "fotossíntese", "conceptual", "v2") is None
+        )
 
     def test_invalidate_chave_inexistente_retorna_false(self):
         """invalidate em chave inexistente deve retornar False sem erro."""
@@ -160,6 +171,7 @@ class TestCache:
     def test_cache_persiste_em_disco(self, tmp_path, monkeypatch):
         """O cache deve estar gravado em JSON no disco após set."""
         import app.services.cache as cache_module
+
         temp_cache = tmp_path / "cache_disco.json"
         monkeypatch.setattr(cache_module, "_CACHE_FILE", temp_cache)
 
@@ -175,6 +187,7 @@ class TestCache:
 # BLOCO 3 — Output Manager
 # ════════════════════════════════════════════════════════════════════════════
 
+
 class TestOutputManager:
     """Verifica se save() grava JSON correto no disco."""
 
@@ -182,6 +195,7 @@ class TestOutputManager:
     def _output_temp(self, tmp_path, monkeypatch):
         """Redireciona _OUTPUTS_DIR para diretório temporário."""
         import app.storage.output_manager as om
+
         monkeypatch.setattr(om, "_OUTPUTS_DIR", tmp_path / "outputs")
         monkeypatch.setattr(om, "_SAMPLES_DIR", tmp_path / "samples")
         self.tmp_path = tmp_path
@@ -189,6 +203,7 @@ class TestOutputManager:
     def _fake_result(self):
         """Retorna um resultado sintético sem chamar a API."""
         from app.prompts.schemas import ConceptualResponse
+
         return ConceptualResponse(
             definition="Fotossíntese é a conversão de luz em energia.",
             why_it_matters="Sustenta a cadeia alimentar.",
@@ -200,7 +215,9 @@ class TestOutputManager:
         """save() deve criar um arquivo .json no disco."""
         from app.storage.output_manager import save
 
-        path = save(profile_fixture, "fotossíntese", "conceptual", "v2", self._fake_result())
+        path = save(
+            profile_fixture, "fotossíntese", "conceptual", "v2", self._fake_result()
+        )
 
         assert path.exists(), "Arquivo de output deve existir"
         assert path.suffix == ".json", "Arquivo deve ter extensão .json"
@@ -209,7 +226,9 @@ class TestOutputManager:
         """JSON salvo deve conter 'metadata' e 'result' com campos corretos."""
         from app.storage.output_manager import save
 
-        path = save(profile_fixture, "fotossíntese", "conceptual", "v2", self._fake_result())
+        path = save(
+            profile_fixture, "fotossíntese", "conceptual", "v2", self._fake_result()
+        )
 
         with open(path, encoding="utf-8") as f:
             payload = json.load(f)
@@ -227,7 +246,9 @@ class TestOutputManager:
         """'result' deve conter os campos do ConceptualResponse."""
         from app.storage.output_manager import save
 
-        path = save(profile_fixture, "fotossíntese", "conceptual", "v2", self._fake_result())
+        path = save(
+            profile_fixture, "fotossíntese", "conceptual", "v2", self._fake_result()
+        )
 
         with open(path, encoding="utf-8") as f:
             payload = json.load(f)
@@ -243,8 +264,13 @@ class TestOutputManager:
         """save() deve criar a hierarquia de diretórios automaticamente."""
         from app.storage.output_manager import save
 
-        path = save(profile_fixture, "fotossíntese", "reflection", "v2",
-                    {"raw": "resposta bruta de reflexão"})
+        path = save(
+            profile_fixture,
+            "fotossíntese",
+            "reflection",
+            "v2",
+            {"raw": "resposta bruta de reflexão"},
+        )
 
         assert path.parent.exists(), "Diretório de output deve ser criado"
 
@@ -253,8 +279,12 @@ class TestOutputManager:
         from app.storage.output_manager import save
 
         path = save(
-            profile_fixture, "fotossíntese", "conceptual", "v2",
-            self._fake_result(), dest="samples"
+            profile_fixture,
+            "fotossíntese",
+            "conceptual",
+            "v2",
+            self._fake_result(),
+            dest="samples",
         )
 
         assert "samples" in str(path), "Path deve estar dentro do diretório samples"

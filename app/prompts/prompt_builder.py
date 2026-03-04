@@ -13,13 +13,13 @@ from app.prompts.base_prompts import (
     STYLE_HINTS,
 )
 from app.prompts.prompt_versions import VERSIONS
-from app.prompts.schemas import get_schema, SCHEMA_MAP
+from app.prompts.schemas import get_schema
 
 _FORMAT_MAP = {
     "conceptual": FORMAT_CONCEPTUAL,
-    "examples":   FORMAT_EXAMPLES,
+    "examples": FORMAT_EXAMPLES,
     "reflection": FORMAT_REFLECTION,
-    "visual":     FORMAT_VISUAL,
+    "visual": FORMAT_VISUAL,
 }
 
 VALID_CONTENT_TYPES = list(VERSIONS.keys())
@@ -51,7 +51,9 @@ def build_prompt(
         ValueError: Se content_type ou version forem inválidos.
     """
     if content_type not in VALID_CONTENT_TYPES:
-        raise ValueError(f"content_type inválido: '{content_type}'. Use: {VALID_CONTENT_TYPES}")
+        raise ValueError(
+            f"content_type inválido: '{content_type}'. Use: {VALID_CONTENT_TYPES}"
+        )
     if version not in VALID_VERSIONS:
         raise ValueError(f"version inválida: '{version}'. Use: {VALID_VERSIONS}")
 

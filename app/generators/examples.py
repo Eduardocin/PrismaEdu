@@ -22,8 +22,10 @@ def generate_examples(
     Retorna ExamplesResponse (v2) ou dict com chave 'raw' (v1).
     """
     return run_generator(
-        profile, topic, "examples", version, temperature,
+        profile,
+        topic,
+        "examples",
+        version,
+        temperature,
         max_output_tokens=MAX_OUTPUT_TOKENS,
     )
-
-
