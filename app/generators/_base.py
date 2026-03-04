@@ -4,33 +4,12 @@ Função compartilhada por todos os generators.
 Orquestra: cache → prompt_builder → gemini_client → validação Pydantic → cache → output.
 """
 
-import re
 from pydantic import BaseModel
+from app.generators._parsers import _is_truncated, _safe_parse
 from app.prompts.prompt_builder import build_prompt
 from app.services.gemini_client import generate
 from app.services import cache as cache_service
 from app.storage.output_manager import save as save_output
-
-
-def _is_truncated(raw: str) -> bool:
-    stripped = raw.strip()
-    return not (stripped.endswith("}") or stripped.endswith('}"'))
-
-
-def _safe_parse(raw: str, model_class):
-    if _is_truncated(raw):
-        return {"raw": raw, "truncated": True}
-    try:
-        return model_class.model_validate_json(raw)
-    except Exception:
-        pass
-    match = re.search(r"```json\s*(.*?)\s*```", raw, re.DOTALL)
-    if match:
-        try:
-            return model_class.model_validate_json(match.group(1))
-        except Exception:
-            pass
-    return {"raw": raw, "truncated": False}
 
 
 def run_generator(
