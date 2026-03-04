@@ -26,5 +26,5 @@ jobs:
       - name: Executar testes
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: ${{ secrets.GEMINI_MODEL }}
+          GEMINI_MODEL: gemini-2.5-flash-lite
         run: pytest tests/ -v
