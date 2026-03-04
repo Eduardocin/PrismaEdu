@@ -1,3 +1,15 @@
+---
+title: Prisma Edu
+emoji: 🔷
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: 6.8.0
+app_file: app.py
+pinned: false
+license: mit
+---
+
 # 🔷 PrismaEdu
 
 Plataforma educativa que gera conteúdo personalizado para alunos usando a **API do Google Gemini**.  
