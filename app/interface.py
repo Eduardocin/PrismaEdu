@@ -65,7 +65,14 @@ def _format_result(result: object) -> str:
     if result is None:
         return "_Nenhum conteudo gerado._"
     if isinstance(result, dict):
-        return result.get("raw", str(result))
+        warning = ""
+        if result.get("truncated"):
+            warning = (
+                "> ⚠️ **Resposta incompleta** — o tópico gerou mais conteúdo "
+                "do que o limite permite.\n"
+                "> Tente um tópico mais específico ou reduza o nível de detalhe.\n\n"
+            )
+        return warning + result.get("raw", str(result))
     cls_name = type(result).__name__
     if cls_name == "ConceptualResponse":
         lines = [
