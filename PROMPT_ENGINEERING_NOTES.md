@@ -15,6 +15,7 @@ Cada técnica foi escolhida com base em seu impacto direto na qualidade pedagóg
 6. [Generator: Visual](#6-generator-visual)
 7. [Análise comparativa v1 vs v2](#7-análise-comparativa-v1-vs-v2)
 8. [Controle de tokens](#8-controle-de-tokens)
+9. [Conciseness constraints e JSON safety](#9-conciseness-constraints-e-json-safety)
 
 ---
 
@@ -94,6 +95,25 @@ Isso elimina respostas em prosa livre, garante campos previsíveis e permite ren
 
 ---
 
+### Conciseness Constraints (todos os prompts — v1 e v2)
+
+**O que é:** Instrução de brevidade adicionada ao final de **todos** os templates (v1 e v2) de todos os generators.
+
+**Texto exato:**
+```
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
+```
+
+**Por que foi necessária:** O Gemini, sem essa instrução, pode gerar respostas extensas que atingem o `max_output_tokens` antes de fechar o JSON — causando truncamento silencioso. A instrução atua em duas frentes:
+1. **Redução preventiva** — o modelo limita o próprio output antes de atingir o limite de tokens
+2. **JSON safety** — lembra o modelo de fechar o objeto JSON mesmo em respostas mais curtas
+
+**Complemento no código:** A função `_safe_parse` em `app/generators/_parsers.py` detecta JSON truncado (`_is_truncated`) e retorna `{"truncated": True}` em vez de lançar exceção, enquanto a interface exibe um alerta ⚠️ orientando o usuário a usar um tópico mais específico.
+
+---
+
 ### Style Hint Adaptativo
 
 **O que é:** Dica de adaptação baseada no `estilo_aprendizado` do aluno, mapeada em `STYLE_HINTS`.
@@ -132,7 +152,13 @@ Isso elimina respostas em prosa livre, garante campos previsíveis e permite ren
 ### Prompt v1
 
 ```
-Explique o conceito de 'decoradores em Python'.
+Aluno: {nome} | Nível: {nivel}
+
+Explique o conceito de '{topic}' de forma clara e direta.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
 ```
 
 ### Prompt v2 (exemplo — Larissa Mendes, avançada, auditiva)
@@ -146,14 +172,13 @@ Explique o conceito de 'decoradores em Python' para este aluno.
 Antes de responder, pense em voz alta: o que o aluno já deve saber?
 Quais obstáculos ele pode ter? Como tornar isso concreto para ele?
 
-Estruture a resposta com:
-1. Definição simples (1-2 frases)
-2. Por que isso importa
-3. Explicação passo a passo
-4. Resumo final
-
+{format_instruction}
 Adapte a linguagem ao nível avançado e ao estilo auditivo.
 Restrição: responda apenas sobre 'decoradores em Python', em português do Brasil, sem inventar fatos.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
 ```
 
 ### Output v2 real — Larissa Mendes / "decoradores em Python"
@@ -200,14 +225,19 @@ Restrição: responda apenas sobre 'decoradores em Python', em português do Bra
 ### Prompt v1
 
 ```
-Dê um exemplo prático de 'listas em Python'.
+Aluno: {nome} | Nível: {nivel}
+
+Dê um exemplo prático de '{topic}'.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
 ```
 
 ### Prompt v2 (exemplo — Pedro Alves, iniciante, cinestésico)
 
 ```
 Aluno: Pedro Alves, 15 anos | Nível: iniciante | Estilo: cinestésico
-
 Dica de adaptação: Use exemplos práticos, situações do mundo real e exercícios aplicados.
 
 Crie um exemplo prático de 'listas em Python' personalizado para este aluno.
@@ -222,11 +252,17 @@ Exemplo:
 O que cada parte faz:
   - `sum(notas)`: soma todos os valores
   - `len(notas)`: conta quantas notas existem
+  - `/`: divide para obter a média
 Variação: tente calcular apenas a maior nota.
 ---
 
-Agora crie um exemplo diferente sobre 'listas em Python', adaptado ao estilo cinesticósico deste aluno.
+Agora crie um exemplo diferente sobre 'listas em Python', adaptado ao estilo cinestésico deste aluno.
+{format_instruction}
 Restrição: use apenas exemplos reais e funcionais, em português do Brasil.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
 ```
 
 ### Diferença observada v1 → v2
@@ -245,7 +281,13 @@ Restrição: use apenas exemplos reais e funcionais, em português do Brasil.
 ### Prompt v1
 
 ```
-Crie 3 perguntas de reflexão sobre 'estruturas de repetição'.
+Aluno: {nome} | Nível: {nivel}
+
+Crie 3 perguntas de reflexão sobre '{topic}'.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
 ```
 
 ### Prompt v2 (exemplo — Carlos Eduardo, intermediário, leitura-escrita)
@@ -257,9 +299,13 @@ Crie perguntas de reflexão sobre 'estruturas de repetição' que estimulem este
 a pensar criticamente.
 As perguntas devem conectar o tema com a realidade e o dia a dia do aluno.
 
-Gere exatamente 3 perguntas de reflexão numeradas.
+{format_instruction}
 Gradação: a primeira pergunta deve ser mais simples, a última mais desafiadora.
 Restrição: perguntas abertas, sem respostas prontas, em português do Brasil.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
 ```
 
 ### Diferença observada v1 → v2
@@ -272,13 +318,26 @@ Restrição: perguntas abertas, sem respostas prontas, em português do Brasil.
 ## 6. Generator: Visual
 
 **Arquivo:** `app/generators/visual.py`  
-**Técnicas v2:** Persona + Context Setting + Style Hint + Output Formatting + Inline Restrictions  
-**Max tokens:** 400
+**Técnicas v2:** Persona + Context Setting + Style Hint + Output Formatting + ASCII Constraints + Inline Restrictions  
+**Max tokens:** 1200
 
 ### Prompt v1
 
 ```
-Crie uma representação visual textual de 'recursividade'.
+Aluno: {nome} | Nível: {nivel}
+
+Crie uma representação visual textual de '{topic}'.
+
+Regras para o diagrama ASCII:
+- O diagrama ASCII deve ter no máximo 8 linhas
+- Cada linha deve ter no máximo 60 caracteres
+- Use setas simples: -->, |, v, ^
+- Não use caixas complexas com bordas duplas
+- O campo visual_representation deve estar completo e fechado
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
 ```
 
 ### Prompt v2 (exemplo — Ana Beatriz, iniciante, visual)
@@ -289,19 +348,40 @@ Dica de adaptação: Use diagramas textuais, tabelas, listas e representações 
 
 Crie uma explicação visual e analógica de 'recursividade' adaptada para este aluno.
 
-Estruture a resposta com:
-1. Analogia do cotidiano
-2. Representação textual (tabela, lista hierárquica ou ASCII)
-3. Legenda explicativa
-
-A analogia deve usar algo familiar para uma jovem de 14 anos com interesse em arte, biologia.
+{format_instruction}
+A analogia deve usar algo familiar para uma jovem de 14 anos no nível iniciante.
+Adapte a analogia para o estilo visual do aluno.
+A analogia deve ter no máximo 3 frases curtas.
 Restrição: use apenas analogias do cotidiano, sem termos técnicos não explicados, em português do Brasil.
+
+Regras para o diagrama ASCII:
+- O diagrama ASCII deve ter no máximo 8 linhas
+- Cada linha deve ter no máximo 60 caracteres
+- Use setas simples: -->, |, v, ^
+- Não use caixas complexas com bordas duplas
+- O campo visual_representation deve estar completo e fechado
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
 ```
+
+### Restrições de diagrama ASCII
+
+Adicionadas explicitamente em v1 e v2 após diagnóstico de outputs com diagramas extensos e mal renderizados no Markdown:
+
+| Restrição | Motivo |
+|---|---|
+| Máx 8 linhas | Evita scroll excessivo na interface |
+| Máx 60 chars/linha | Garante renderização sem quebra em telas menores |
+| Setas simples (`-->`, `\|`, `v`, `^`) | Compatibilidade universal com Markdown |
+| Sem bordas duplas | Caracteres `═`, `╔`, `╗` quebram em alguns terminais/browsers |
+| Campo `visual_representation` completo | Instrução explícita contra truncamento do campo mais longo |
 
 ### Diferença observada v1 → v2
 
-- **v1** gera um diagrama ASCII genérico de árvore binária ou código recursivo, inacessível para uma iniciante.
-- **v2** ancora a analogia em arte ou biologia (ex.: espiral de uma concha, galhos de uma árvore), usa representação ASCII simplificada com legenda adaptada ao nível iniciante.
+- **v1** gera um diagrama ASCII genérico de árvore binária ou código recursivo, inacessível para uma iniciante. Com as restrições, o diagrama é curto e usa setas simples.
+- **v2** ancora a analogia em algo familiar (ex.: espiral de uma concha, galhos de uma árvore), limita a analogia a 3 frases curtas, adapta ao estilo do aluno e produz representação ASCII dentro dos limites definidos.
 
 ---
 
@@ -336,10 +416,83 @@ Cada generator define um limite explícito de `max_output_tokens` repassado à A
 
 | Generator | Limite | Justificativa |
 |---|---|---|
-| `conceptual.py` | 600 | 4 campos, sendo `steps` o mais extenso (3+ itens) |
-| `examples.py` | 400 | Código + explicação por linha + variação |
-| `reflection.py` | 300 | Apenas 3 perguntas — menor schema do projeto |
-| `visual.py` | 400 | Representação ASCII + analogia + legenda |
+| `conceptual.py` | 1000 | 4 campos, sendo `steps` o mais extenso (3+ itens com raciocínio CoT) |
+| `examples.py` | 1200 | Código + explicação linha a linha + variação (maior schema do projeto) |
+| `reflection.py` | 600 | 3 perguntas com gradação — schema menor, mas perguntas contextualizadas podem ser longas |
+| `visual.py` | 1200 | Representação ASCII + analogia + legenda; campo `visual_representation` pode ser extenso |
 
 O parâmetro flui por: `generator` → `_base.run_generator()` → `gemini_client.generate()` → `GenerateContentConfig(max_output_tokens=...)`.
+
+---
+
+## 9. Conciseness constraints e JSON safety
+
+### Problema identificado
+
+O Gemini pode, por padrão, gerar respostas longas demais para o `max_output_tokens` configurado, causando **truncamento silencioso** — o JSON é cortado antes de ser fechado, resultando em parse error na validação Pydantic.
+
+### Solução em duas camadas
+
+**Camada 1 — Instrução preventiva nos prompts (todos os templates, v1 e v2):**
+```
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras.
+Prefira listas curtas a parágrafos longos.
+O JSON de resposta deve estar sempre completo e fechado.
+```
+Instrui o modelo a se auto-limitar *antes* de atingir o limite de tokens.
+
+**Camada 2 — Parser robusto no código (`app/generators/_parsers.py`):**
+
+```python
+def _is_truncated(raw: str) -> bool:
+    """Retorna True se o JSON começa com { mas não fecha corretamente."""
+    stripped = raw.strip()
+    if not stripped.startswith("{"):
+        return False
+    return not (stripped.endswith("}") or stripped.endswith('"'))
+
+def _safe_parse(raw: str, model_class):
+    if _is_truncated(raw):
+        return {"raw": raw, "truncated": True}
+    try:
+        return model_class.model_validate_json(raw)
+    except Exception:
+        pass
+    # fallback: extrai bloco ```json```
+    match = re.search(r"```json\s*(.*?)\s*```", raw, re.DOTALL)
+    if match:
+        try:
+            return model_class.model_validate_json(match.group(1))
+        except Exception:
+            pass
+    return {"raw": raw, "truncated": False}
+```
+
+**Camada 3 — Alerta na interface (`app/interface.py`):**
+
+Quando `truncated=True`, a interface exibe:
+> ⚠️ **Resposta incompleta** — o tópico gerou mais conteúdo do que o limite permite.
+> Tente um tópico mais específico ou reduza o nível de detalhe.
+
+### Fluxo completo de tratamento de truncamento
+
+```
+Gemini API
+    |
+    v
+raw text (pode estar truncado)
+    |
+    v
+_safe_parse(raw, schema)
+    ├── _is_truncated? → {"truncated": True, "raw": ...}
+    ├── model_validate_json direto? → Instância Pydantic ✓
+    ├── fallback ```json```? → Instância Pydantic ✓
+    └── falha total → {"truncated": False, "raw": ...}
+    |
+    v
+_format_result(result)
+    ├── truncated=True → ⚠️ alerta + conteúdo parcial
+    ├── truncated=False → conteúdo bruto sem alerta
+    └── Pydantic → campos formatados normalmente
+```
 
