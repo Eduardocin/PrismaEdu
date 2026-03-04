@@ -18,7 +18,9 @@ Técnicas aplicadas na v2:
 CONCEPTUAL_V1 = """\
 Aluno: {nome} | Nível: {nivel}
 
-Explique o conceito de '{topic}' de forma clara e direta.\
+Explique o conceito de '{topic}' de forma clara e direta.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 CONCEPTUAL_V2 = """\
@@ -32,7 +34,9 @@ Quais obstáculos ele pode ter? Como tornar isso concreto para ele?
 
 {format_instruction}
 Adapte a linguagem ao nível {nivel} e ao estilo {estilo_aprendizado}.
-Restrição: responda apenas sobre '{topic}', em português do Brasil, sem inventar fatos.\
+Restrição: responda apenas sobre '{topic}', em português do Brasil, sem inventar fatos.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -42,7 +46,9 @@ Restrição: responda apenas sobre '{topic}', em português do Brasil, sem inven
 EXAMPLES_V1 = """\
 Aluno: {nome} | Nível: {nivel}
 
-Dê um exemplo prático de '{topic}'.\
+Dê um exemplo prático de '{topic}'.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 EXAMPLES_V2 = """\
@@ -67,7 +73,9 @@ Variação: tente calcular apenas a maior nota.
 
 Agora crie um exemplo diferente sobre '{topic}', adaptado ao estilo {estilo_aprendizado} deste aluno.
 {format_instruction}
-Restrição: use apenas exemplos reais e funcionais, em português do Brasil.\
+Restrição: use apenas exemplos reais e funcionais, em português do Brasil.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -77,7 +85,9 @@ Restrição: use apenas exemplos reais e funcionais, em português do Brasil.\
 REFLECTION_V1 = """\
 Aluno: {nome} | Nível: {nivel}
 
-Crie 3 perguntas de reflexão sobre '{topic}'.\
+Crie 3 perguntas de reflexão sobre '{topic}'.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 REFLECTION_V2 = """\
@@ -88,7 +98,9 @@ As perguntas devem conectar o tema com a realidade e o dia a dia do aluno.
 
 {format_instruction}
 Gradação: a primeira pergunta deve ser mais simples, a última mais desafiadora.
-Restrição: perguntas abertas, sem respostas prontas, em português do Brasil.\
+Restrição: perguntas abertas, sem respostas prontas, em português do Brasil.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -98,7 +110,9 @@ Restrição: perguntas abertas, sem respostas prontas, em português do Brasil.\
 VISUAL_V1 = """\
 Aluno: {nome} | Nível: {nivel}
 
-Crie uma representação visual textual de '{topic}'.\
+Crie uma representação visual textual de '{topic}'.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 VISUAL_V2 = """\
@@ -109,7 +123,9 @@ Crie uma explicação visual e analógica de '{topic}' adaptada para este aluno.
 
 {format_instruction}
 A analogia deve usar algo familiar para um jovem de {idade} anos no nível {nivel}.
-Restrição: use apenas analogias do cotidiano, sem termos técnicos não explicados, em português do Brasil.\
+Restrição: use apenas analogias do cotidiano, sem termos técnicos não explicados, em português do Brasil.
+
+Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
 # ─────────────────────────────────────────────────────────────────────────────
