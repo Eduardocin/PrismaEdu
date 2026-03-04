@@ -20,6 +20,7 @@ def run_generator(
     temperature: float = 0.7,
     use_cache: bool = True,
     save: bool = True,
+    max_output_tokens: int | None = None,
 ) -> BaseModel:
     """
     Executa o pipeline completo de geração de conteúdo:
@@ -38,6 +39,7 @@ def run_generator(
         temperature: Criatividade da resposta.
         use_cache: Se True, tenta servir do cache antes de chamar a API.
         save: Se True, persiste o resultado em storage/outputs/.
+        max_output_tokens: Limite de tokens no output. None = sem limite explícito.
 
     Returns:
         Instância Pydantic validada (v2) ou dict com 'raw' (v1).
@@ -63,6 +65,7 @@ def run_generator(
         system_instruction=system,
         temperature=temperature,
         response_schema=schema,
+        max_output_tokens=max_output_tokens,
     )
 
     # 4. v1: retorna texto bruto

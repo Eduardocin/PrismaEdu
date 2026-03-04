@@ -24,6 +24,7 @@ def generate(
     system_instruction: str = "",
     temperature: float = 0.7,
     response_schema=None,
+    max_output_tokens: int | None = None,
 ) -> str:
     """
     Envia um prompt ao Gemini e retorna o texto gerado.
@@ -34,6 +35,7 @@ def generate(
         temperature: Criatividade da resposta (0.0 = determinístico, 1.0 = criativo).
         response_schema: Modelo Pydantic opcional. Quando fornecido, força resposta
                          em JSON estruturado e validado (Output Schema).
+        max_output_tokens: Limite de tokens no output. None = sem limite explícito.
 
     Returns:
         Texto gerado (JSON string quando response_schema for informado).
@@ -50,6 +52,9 @@ def generate(
             "temperature": temperature,
             "system_instruction": system_instruction or None,
         }
+
+        if max_output_tokens is not None:
+            config_kwargs["max_output_tokens"] = max_output_tokens
 
         if response_schema is not None:
             config_kwargs["response_mime_type"] = "application/json"

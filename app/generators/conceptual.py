@@ -7,6 +7,9 @@ from app.generators._base import run_generator
 from app.prompts.schemas import ConceptualResponse
 
 
+MAX_OUTPUT_TOKENS = 600
+
+
 def generate_conceptual(
     profile: dict,
     topic: str,
@@ -18,7 +21,10 @@ def generate_conceptual(
 
     Retorna ConceptualResponse (v2) ou dict com chave 'raw' (v1).
     """
-    return run_generator(profile, topic, "conceptual", version, temperature)
+    return run_generator(
+        profile, topic, "conceptual", version, temperature,
+        max_output_tokens=MAX_OUTPUT_TOKENS,
+    )
 
 
 if __name__ == "__main__":

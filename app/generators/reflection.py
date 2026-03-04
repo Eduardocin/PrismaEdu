@@ -7,6 +7,9 @@ from app.generators._base import run_generator
 from app.prompts.schemas import ReflectionResponse
 
 
+MAX_OUTPUT_TOKENS = 300
+
+
 def generate_reflection(
     profile: dict,
     topic: str,
@@ -18,7 +21,10 @@ def generate_reflection(
 
     Retorna ReflectionResponse (v2) ou dict com chave 'raw' (v1).
     """
-    return run_generator(profile, topic, "reflection", version, temperature)
+    return run_generator(
+        profile, topic, "reflection", version, temperature,
+        max_output_tokens=MAX_OUTPUT_TOKENS,
+    )
 
 
 if __name__ == "__main__":

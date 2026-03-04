@@ -7,6 +7,9 @@ from app.generators._base import run_generator
 from app.prompts.schemas import ExamplesResponse
 
 
+MAX_OUTPUT_TOKENS = 400
+
+
 def generate_examples(
     profile: dict,
     topic: str,
@@ -18,7 +21,10 @@ def generate_examples(
 
     Retorna ExamplesResponse (v2) ou dict com chave 'raw' (v1).
     """
-    return run_generator(profile, topic, "examples", version, temperature)
+    return run_generator(
+        profile, topic, "examples", version, temperature,
+        max_output_tokens=MAX_OUTPUT_TOKENS,
+    )
 
 
 if __name__ == "__main__":

@@ -6,6 +6,8 @@ Gerador de explicações visuais e analógicas.
 from app.generators._base import run_generator
 from app.prompts.schemas import VisualResponse
 
+MAX_OUTPUT_TOKENS = 400
+
 
 def generate_visual(
     profile: dict,
@@ -18,7 +20,10 @@ def generate_visual(
 
     Retorna VisualResponse (v2) ou dict com chave 'raw' (v1).
     """
-    return run_generator(profile, topic, "visual", version, temperature)
+    return run_generator(
+        profile, topic, "visual", version, temperature,
+        max_output_tokens=MAX_OUTPUT_TOKENS,
+    )
 
 
 if __name__ == "__main__":
