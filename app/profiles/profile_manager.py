@@ -37,5 +37,3 @@ def get_profile_by_name(nome: str) -> dict | None:
 def list_all_names() -> list[str]:
     """Retorna uma lista com os nomes de todos os alunos."""
     return [s["nome"] for s in load_profiles()]
-
-

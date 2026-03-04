@@ -44,7 +44,9 @@ def get(student_id: str, topic: str, content_type: str, version: str) -> dict | 
     return _load().get(key)
 
 
-def set(student_id: str, topic: str, content_type: str, version: str, data: dict) -> None:
+def set(
+    student_id: str, topic: str, content_type: str, version: str, data: dict
+) -> None:
     """
     Salva uma entrada no cache.
 
@@ -126,7 +128,9 @@ if __name__ == "__main__":
     s = stats()
     print(f"\nEntradas no cache: {s['total_entries']}")
     for e in s["entries"]:
-        print(f"  [{e['content_type']}/{e['version']}] {e['student_id']} — '{e['topic']}'")
+        print(
+            f"  [{e['content_type']}/{e['version']}] {e['student_id']} — '{e['topic']}'"
+        )
 
     # Invalidar uma entrada
     removida = invalidate("student_001", "funções em Python", "conceptual", "v2")

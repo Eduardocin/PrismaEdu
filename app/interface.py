@@ -36,21 +36,22 @@ CSS = """
 
 CONTENT_TYPES: dict[str, str] = {
     "Explicacao Conceitual": "conceptual",
-    "Exemplos Praticos":     "examples",
+    "Exemplos Praticos": "examples",
     "Perguntas de Reflexao": "reflection",
-    "Resumo Visual":         "visual",
+    "Resumo Visual": "visual",
 }
 
 NIVEL_BADGE_CLASS: dict[str, str] = {
-    "iniciante":     "badge-iniciante",
+    "iniciante": "badge-iniciante",
     "intermediario": "badge-intermediario",
-    "avancado":      "badge-avancado",
+    "avancado": "badge-avancado",
 }
 
-NIVEIS  = ["iniciante", "intermediario", "avancado"]
+NIVEIS = ["iniciante", "intermediario", "avancado"]
 ESTILOS = ["visual", "auditivo", "leitura-escrita", "cinestetico"]
 
 # ── Montagem de perfil ────────────────────────────────────────────────────────
+
 
 def _build_profile(nome: str, idade, nivel: str, estilo: str) -> dict:
     return {
@@ -63,7 +64,9 @@ def _build_profile(nome: str, idade, nivel: str, estilo: str) -> dict:
         "descricao": "",
     }
 
+
 # ── Formatacao de resultado ───────────────────────────────────────────────────
+
 
 def _format_result(result: object) -> str:
     if result is None:
@@ -75,7 +78,8 @@ def _format_result(result: object) -> str:
         lines = [
             f"## Definicao\n{result.definition}",
             f"## Por que importa?\n{result.why_it_matters}",
-            "## Passo a passo\n" + "\n".join(f"{i+1}. {s}" for i, s in enumerate(result.steps)),
+            "## Passo a passo\n"
+            + "\n".join(f"{i + 1}. {s}" for i, s in enumerate(result.steps)),
             f"## Resumo\n{result.summary}",
         ]
         return "\n\n".join(lines)
@@ -83,12 +87,13 @@ def _format_result(result: object) -> str:
         lines = [
             f"## Contexto\n{result.context}",
             f"## Exemplo\n```\n{result.example}\n```",
-            "## O que cada parte faz\n" + "\n".join(f"- {e}" for e in result.explanation),
+            "## O que cada parte faz\n"
+            + "\n".join(f"- {e}" for e in result.explanation),
             f"## Variacao / Exercicio\n{result.variation}",
         ]
         return "\n\n".join(lines)
     if cls_name == "ReflectionResponse":
-        qs = "\n".join(f"{i+1}. {q}" for i, q in enumerate(result.questions))
+        qs = "\n".join(f"{i + 1}. {q}" for i, q in enumerate(result.questions))
         return f"## Perguntas de Reflexao\n\n{qs}"
     if cls_name == "VisualResponse":
         lines = [
@@ -106,26 +111,36 @@ def _format_result(result: object) -> str:
 
 # ── Funcoes de geracao ────────────────────────────────────────────────────────
 
+
 def _get_generator_fn(content_type_key: str):
     ct = CONTENT_TYPES[content_type_key]
     if ct == "conceptual":
         from app.generators.conceptual import generate_conceptual
+
         return generate_conceptual
     if ct == "examples":
         from app.generators.examples import generate_examples
+
         return generate_examples
     if ct == "reflection":
         from app.generators.reflection import generate_reflection
+
         return generate_reflection
     if ct == "visual":
         from app.generators.visual import generate_visual
+
         return generate_visual
     raise ValueError(f"Tipo desconhecido: {ct}")
 
 
 def generate_content(
-    nome: str, idade, nivel: str, estilo: str,
-    topic: str, content_type_key: str, version: str,
+    nome: str,
+    idade,
+    nivel: str,
+    estilo: str,
+    topic: str,
+    content_type_key: str,
+    version: str,
 ) -> str:
     if not nome or not nome.strip():
         return "_Por favor, preencha o nome do aluno._"
@@ -144,8 +159,12 @@ def generate_content(
 
 
 def generate_both_versions(
-    nome: str, idade, nivel: str, estilo: str,
-    topic: str, content_type_key: str,
+    nome: str,
+    idade,
+    nivel: str,
+    estilo: str,
+    topic: str,
+    content_type_key: str,
 ) -> tuple[str, str]:
     if not nome or not nome.strip():
         msg = "_Por favor, preencha o nome do aluno._"
@@ -171,6 +190,7 @@ def generate_both_versions(
 
 # ── HTML helpers ──────────────────────────────────────────────────────────────
 
+
 def _student_chips_html(nome: str, idade, nivel: str, estilo: str) -> str:
     if not nome or not nome.strip():
         return ""
@@ -186,11 +206,16 @@ def _student_chips_html(nome: str, idade, nivel: str, estilo: str) -> str:
 
 # ── Build Interface ───────────────────────────────────────────────────────────
 
+
 def _student_form() -> tuple:
-    nome   = gr.Textbox(label="Nome do aluno", placeholder="ex.: Ana Beatriz")
-    idade  = gr.Number(label="Idade", value=18, minimum=1, maximum=99, precision=0)
-    nivel  = gr.Dropdown(choices=NIVEIS, value="intermediario", label="Nivel", interactive=True)
-    estilo = gr.Dropdown(choices=ESTILOS, value="visual", label="Estilo de aprendizado", interactive=True)
+    nome = gr.Textbox(label="Nome do aluno", placeholder="ex.: Ana Beatriz")
+    idade = gr.Number(label="Idade", value=18, minimum=1, maximum=99, precision=0)
+    nivel = gr.Dropdown(
+        choices=NIVEIS, value="intermediario", label="Nivel", interactive=True
+    )
+    estilo = gr.Dropdown(
+        choices=ESTILOS, value="visual", label="Estilo de aprendizado", interactive=True
+    )
     return nome, idade, nivel, estilo
 
 
@@ -198,16 +223,17 @@ def build_interface() -> gr.Blocks:
     content_type_choices = list(CONTENT_TYPES.keys())
 
     with gr.Blocks(css=CSS, title="Prisma - Plataforma Educativa") as demo:
-
-        gr.HTML(value="""
+        gr.HTML(
+            value="""
 <div class="prisma-header">
   <div class="prisma-eyebrow">Plataforma Educativa - UFPE</div>
   <h1 class="prisma-title"><span>Prisma</span> - Conteudo Personalizado com IA</h1>
   <p class="prisma-subtitle">Explicacoes adaptadas ao perfil de cada aluno via Google Gemini</p>
-</div>""", container=False)
+</div>""",
+            container=False,
+        )
 
         with gr.Tabs():
-
             with gr.TabItem("Gerador"):
                 with gr.Row():
                     with gr.Column(scale=1, min_width=280):
@@ -216,23 +242,41 @@ def build_interface() -> gr.Blocks:
                         chips_html = gr.HTML(container=False)
 
                         gr.Markdown("### Conteudo")
-                        txt_topic    = gr.Textbox(label="Topico", placeholder="ex.: fotossintese, fracoes, Segunda Guerra...", lines=2)
-                        dd_content   = gr.Dropdown(choices=content_type_choices, value=content_type_choices[0], label="Tipo de conteudo", interactive=True)
-                        dd_version   = gr.Dropdown(
+                        txt_topic = gr.Textbox(
+                            label="Topico",
+                            placeholder="ex.: fotossintese, fracoes, Segunda Guerra...",
+                            lines=2,
+                        )
+                        dd_content = gr.Dropdown(
+                            choices=content_type_choices,
+                            value=content_type_choices[0],
+                            label="Tipo de conteudo",
+                            interactive=True,
+                        )
+                        dd_version = gr.Dropdown(
                             choices=[("Personalizado", "v2"), ("Direto", "v1")],
                             value="v2",
                             label="Versao do prompt",
                             interactive=True,
                         )
-                        btn_generate = gr.Button("Gerar Conteudo", variant="primary", size="lg")
+                        btn_generate = gr.Button(
+                            "Gerar Conteudo", variant="primary", size="lg"
+                        )
 
                     with gr.Column(scale=2):
-                        md_output = gr.Markdown(value="_Preencha os campos e clique em Gerar Conteudo_", label="Resultado")
+                        md_output = gr.Markdown(
+                            value="_Preencha os campos e clique em Gerar Conteudo_",
+                            label="Resultado",
+                        )
 
                 _profile_inputs = [txt_nome, num_idade, dd_nivel, dd_estilo]
 
                 for field in _profile_inputs:
-                    field.change(fn=_student_chips_html, inputs=_profile_inputs, outputs=[chips_html])
+                    field.change(
+                        fn=_student_chips_html,
+                        inputs=_profile_inputs,
+                        outputs=[chips_html],
+                    )
 
                 btn_generate.click(
                     fn=generate_content,
@@ -246,23 +290,49 @@ def build_interface() -> gr.Blocks:
                     cmp_nome, cmp_idade, cmp_nivel, cmp_estilo = _student_form()
 
                 with gr.Row():
-                    txt_cmp_topic  = gr.Textbox(label="Topico", placeholder="ex.: derivadas, fotossintese...", lines=1)
-                    dd_cmp_content = gr.Dropdown(choices=content_type_choices, value=content_type_choices[0], label="Tipo de conteudo", interactive=True)
+                    txt_cmp_topic = gr.Textbox(
+                        label="Topico",
+                        placeholder="ex.: derivadas, fotossintese...",
+                        lines=1,
+                    )
+                    dd_cmp_content = gr.Dropdown(
+                        choices=content_type_choices,
+                        value=content_type_choices[0],
+                        label="Tipo de conteudo",
+                        interactive=True,
+                    )
 
-                btn_compare = gr.Button("Comparar: Prompt Direto vs Personalizado", variant="primary", size="lg")
+                btn_compare = gr.Button(
+                    "Comparar: Prompt Direto vs Personalizado",
+                    variant="primary",
+                    size="lg",
+                )
 
                 with gr.Row():
-                    md_v1 = gr.Markdown(value="_Aguardando comparacao..._", label="Prompt Direto")
-                    md_v2 = gr.Markdown(value="_Aguardando comparacao..._", label="Prompt Personalizado")
+                    md_v1 = gr.Markdown(
+                        value="_Aguardando comparacao..._", label="Prompt Direto"
+                    )
+                    md_v2 = gr.Markdown(
+                        value="_Aguardando comparacao..._", label="Prompt Personalizado"
+                    )
 
                 btn_compare.click(
                     fn=generate_both_versions,
-                    inputs=[cmp_nome, cmp_idade, cmp_nivel, cmp_estilo,
-                            txt_cmp_topic, dd_cmp_content],
+                    inputs=[
+                        cmp_nome,
+                        cmp_idade,
+                        cmp_nivel,
+                        cmp_estilo,
+                        txt_cmp_topic,
+                        dd_cmp_content,
+                    ],
                     outputs=[md_v1, md_v2],
                 )
 
-        gr.HTML(value='<div class="prisma-footer">Prisma - Plataforma Educativa com IA - Powered by Google Gemini</div>', container=False)
+        gr.HTML(
+            value='<div class="prisma-footer">Prisma - Plataforma Educativa com IA - Powered by Google Gemini</div>',
+            container=False,
+        )
 
     return demo
 
@@ -271,6 +341,7 @@ def build_interface() -> gr.Blocks:
 
 if __name__ == "__main__":
     import sys
+
     sys.path.insert(0, str(Path(__file__).parent.parent))
     demo = build_interface()
     demo.launch()

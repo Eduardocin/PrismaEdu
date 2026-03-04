@@ -15,3 +15,4 @@ pydantic>=2.12.5
 # ── Desenvolvimento (local apenas) ───────────────────────────────────────────
 
 pytest>=9.0.2
+ruff>=0.4.0

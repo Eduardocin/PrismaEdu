@@ -87,9 +87,12 @@ def list_outputs(student_id: str = None, content_type: str = None) -> list[Path]
         return []
 
     pattern = (
-        f"{student_id}/{content_type}/*.json" if student_id and content_type
-        else f"{student_id}/**/*.json" if student_id
-        else f"**/{content_type}/*.json" if content_type
+        f"{student_id}/{content_type}/*.json"
+        if student_id and content_type
+        else f"{student_id}/**/*.json"
+        if student_id
+        else f"**/{content_type}/*.json"
+        if content_type
         else "**/*.json"
     )
 
@@ -124,7 +127,9 @@ if __name__ == "__main__":
     print(f"Salvo: {path2.relative_to(Path.cwd())}")
 
     # Salvar exemplo em samples/
-    path_sample = save(profile, topic, "conceptual", "v2", result_conceptual, dest="samples")
+    path_sample = save(
+        profile, topic, "conceptual", "v2", result_conceptual, dest="samples"
+    )
     print(f"Sample: {path_sample.relative_to(Path.cwd())}")
 
     # Listar outputs do aluno
@@ -134,6 +139,6 @@ if __name__ == "__main__":
 
     # Carregar e inspecionar um output
     data = load(path1)
-    print(f"\nMetadados do output:")
+    print("\nMetadados do output:")
     for k, v in data["metadata"].items():
         print(f"  {k}: {v}")
