@@ -21,13 +21,6 @@ CSS = """
 .prisma-title span { color: #2D6BE4; }
 .prisma-subtitle { font-size: 0.88rem; opacity: 0.6; }
 
-/* ── Chips de perfil ── */
-.profile-chips { display: flex; flex-wrap: wrap; gap: 5px; padding: 6px 0; }
-.chip { font-size: 0.71rem; padding: 2px 9px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.15); white-space: nowrap; }
-.badge-iniciante     { color: #276133; background: #D4EDDA; border-color: #B8DACC; }
-.badge-intermediario { color: #856404; background: #FFF3CD; border-color: #F5E07F; }
-.badge-avancado      { color: #0C5299; background: #CCE5FF; border-color: #99C9FF; }
-
 /* ── Footer ── */
 .prisma-footer { text-align: center; padding: 0.8rem; margin-top: 1rem; font-size: 0.7rem; opacity: 0.4; }
 """
@@ -188,22 +181,6 @@ def generate_both_versions(
         return fut_v1.result(), fut_v2.result()
 
 
-# ── HTML helpers ──────────────────────────────────────────────────────────────
-
-
-def _student_chips_html(nome: str, idade, nivel: str, estilo: str) -> str:
-    if not nome or not nome.strip():
-        return ""
-    badge_cls = NIVEL_BADGE_CLASS.get(nivel, "")
-    return f"""
-<div class="profile-chips">
-  <span class="chip">{idade} anos</span>
-  <span class="chip {badge_cls} badge">{nivel}</span>
-  <span class="chip">{estilo}</span>
-</div>
-"""
-
-
 # ── Build Interface ───────────────────────────────────────────────────────────
 
 
@@ -239,7 +216,6 @@ def build_interface() -> gr.Blocks:
                     with gr.Column(scale=1, min_width=280):
                         gr.Markdown("### Perfil do aluno")
                         txt_nome, num_idade, dd_nivel, dd_estilo = _student_form()
-                        chips_html = gr.HTML(container=False)
 
                         gr.Markdown("### Conteudo")
                         txt_topic = gr.Textbox(
@@ -271,12 +247,6 @@ def build_interface() -> gr.Blocks:
 
                 _profile_inputs = [txt_nome, num_idade, dd_nivel, dd_estilo]
 
-                for field in _profile_inputs:
-                    field.change(
-                        fn=_student_chips_html,
-                        inputs=_profile_inputs,
-                        outputs=[chips_html],
-                    )
 
                 btn_generate.click(
                     fn=generate_content,
