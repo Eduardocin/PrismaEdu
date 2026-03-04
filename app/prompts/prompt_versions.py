@@ -112,6 +112,13 @@ Aluno: {nome} | Nível: {nivel}
 
 Crie uma representação visual textual de '{topic}'.
 
+Regras para o diagrama ASCII:
+- O diagrama ASCII deve ter no máximo 8 linhas
+- Cada linha deve ter no máximo 60 caracteres
+- Use setas simples: -->, |, v, ^
+- Não use caixas complexas com bordas duplas
+- O campo visual_representation deve estar completo e fechado
+
 Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
 
@@ -123,7 +130,16 @@ Crie uma explicação visual e analógica de '{topic}' adaptada para este aluno.
 
 {format_instruction}
 A analogia deve usar algo familiar para um jovem de {idade} anos no nível {nivel}.
+Adapte a analogia para o estilo {estilo_aprendizado} do aluno.
+A analogia deve ter no máximo 3 frases curtas.
 Restrição: use apenas analogias do cotidiano, sem termos técnicos não explicados, em português do Brasil.
+
+Regras para o diagrama ASCII:
+- O diagrama ASCII deve ter no máximo 8 linhas
+- Cada linha deve ter no máximo 60 caracteres
+- Use setas simples: -->, |, v, ^
+- Não use caixas complexas com bordas duplas
+- O campo visual_representation deve estar completo e fechado
 
 Seja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.\
 """
