@@ -70,12 +70,40 @@ body, .gradio-container {
 }
 
 /* ── Inputs ── */
-input, textarea, select,
-.gr-input, .gr-textarea, .gr-dropdown {
+.gradio-container input,
+.gradio-container textarea,
+.gradio-container .wrap-inner,
+.gradio-container select {
     font-family: 'DM Sans', sans-serif !important;
-    background: #F7F7F5 !important;
-    border: 1px solid #E4E4E0 !important;
+    background: #FFFFFF !important;
+    color: #1A1A1A !important;
+    border: 1px solid #DDDDD8 !important;
     border-radius: 8px !important;
+}
+
+/* ── Labels visíveis ── */
+.gradio-container label > span,
+.gradio-container .label-wrap span {
+    color: #444444 !important;
+    font-weight: 500 !important;
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+/* ── Tabs — texto visível ── */
+.tab-nav button span,
+.tab-nav button {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+}
+
+/* ── Output markdown — texto escuro ── */
+.gradio-container .prose,
+.gradio-container .prose p,
+.gradio-container .prose li,
+.gradio-container .prose h1,
+.gradio-container .prose h2,
+.gradio-container .prose h3 {
     color: #1A1A1A !important;
 }
 
@@ -367,9 +395,16 @@ def _student_chips_html(student_name: str) -> str:
     nivel = profile.get("nivel", "")
     badge_cls = NIVEL_BADGE_CLASS.get(nivel, "")
     interesses = ", ".join(profile.get("interesses", []))
+    centro = profile.get("centro", "")
+    curso = profile.get("curso", "")
+
+    centro_chip = f'<span class="chip">🏛️ {centro}</span>' if centro else ""
+    curso_chip  = f'<span class="chip">📚 {curso}</span>' if curso else ""
 
     return f"""
 <div class="profile-chips">
+  {centro_chip}
+  {curso_chip}
   <span class="chip">{profile.get('idade', '?')} anos</span>
   <span class="chip {badge_cls} badge">{nivel}</span>
   <span class="chip">🧠 {profile.get('estilo_aprendizado', '—')}</span>
@@ -385,12 +420,16 @@ def _profiles_cards_html() -> str:
         nivel = p.get("nivel", "")
         badge_cls = NIVEL_BADGE_CLASS.get(nivel, "")
         interesses = ", ".join(p.get("interesses", []))
+        centro = p.get("centro", "")
+        curso  = p.get("curso", "")
+        centro_tag = f'<span class="badge" style="background:#EEF2FF;color:#3730A3;">{centro}</span>&nbsp;' if centro else ""
         card = f"""
 <div class="profile-card">
   <div class="profile-card-name">{p.get('nome', '—')}</div>
   <div class="profile-card-meta">
-    <span class="badge {badge_cls}">{nivel}</span>&nbsp;&nbsp;
-    {p.get('idade', '?')} anos · estilo: <strong>{p.get('estilo_aprendizado', '—')}</strong><br>
+    {centro_tag}<span class="badge {badge_cls}">{nivel}</span>&nbsp;&nbsp;
+    {p.get('idade', '?')} anos · <strong>{curso}</strong><br>
+    estilo: <strong>{p.get('estilo_aprendizado', '—')}</strong>&nbsp;·
     <span style="color:#aaa;">interesses:</span> {interesses}
   </div>
   <div class="profile-card-desc">{p.get('descricao', '')}</div>
@@ -406,7 +445,7 @@ def build_interface() -> gr.Blocks:
     student_names = list(PROFILE_MAP.keys())
     content_type_choices = list(CONTENT_TYPES.keys())
 
-    with gr.Blocks(css=CSS, title="Prisma — Plataforma Educativa") as demo:
+    with gr.Blocks(css=CSS, title="Prisma — Plataforma Educativa", theme=gr.themes.Base()) as demo:
 
         # ── Header ──────────────────────────────────────────────────────────
         gr.HTML("""

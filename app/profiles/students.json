@@ -2,39 +2,47 @@
   "students": [
     {
       "id": "student_001",
-      "nome": "Ana Beatriz",
-      "idade": 14,
-      "nivel": "iniciante",
-      "estilo_aprendizado": "visual",
-      "interesses": ["arte", "biologia"],
-      "descricao": "Aprende melhor com diagramas, ilustrações e representações gráficas. Tem dificuldade com textos longos sem apoio visual."
+      "nome": "Felipe Andrade",
+      "idade": 20,
+      "centro": "CIn",
+      "curso": "Ciência da Computação",
+      "nivel": "avançado",
+      "estilo_aprendizado": "leitura-escrita",
+      "interesses": ["algoritmos", "inteligência artificial", "sistemas distribuídos"],
+      "descricao": "Aluno do CIn/UFPE no 5º período. Aprende melhor lendo documentação técnica, escrevendo pseudocódigo e consultando papers. Tem facilidade com abstrações matemáticas e prefere ir direto ao rigor formal antes dos exemplos."
     },
     {
       "id": "student_002",
-      "nome": "Carlos Eduardo",
-      "idade": 17,
+      "nome": "Mariana Costa",
+      "idade": 22,
+      "centro": "CCSA",
+      "curso": "Administração",
       "nivel": "intermediário",
-      "estilo_aprendizado": "leitura-escrita",
-      "interesses": ["história", "filosofia"],
-      "descricao": "Prefere aprender por meio de textos detalhados, anotações e listas. Gosta de resumir o conteúdo com suas próprias palavras."
+      "estilo_aprendizado": "auditivo",
+      "interesses": ["gestão de projetos", "economia comportamental", "startups"],
+      "descricao": "Aluna do CCSA/UFPE no 6º período. Assimila melhor ouvindo cases, debates e narrativas. Beneficia-se de analogias com o mercado de trabalho e exemplos de empresas reais. Tem dificuldade com fórmulas isoladas sem contexto de negócio."
     },
     {
       "id": "student_003",
-      "nome": "Larissa Mendes",
-      "idade": 19,
-      "nivel": "avançado",
-      "estilo_aprendizado": "auditivo",
-      "interesses": ["música", "física", "matemática"],
-      "descricao": "Assimila melhor ouvindo explicações e discussões. Beneficia-se de analogias faladas e narrativas explicativas detalhadas."
+      "nome": "Beatriz Lemos",
+      "idade": 21,
+      "centro": "CB",
+      "curso": "Biomedicina",
+      "nivel": "intermediário",
+      "estilo_aprendizado": "visual",
+      "interesses": ["genética", "microbiologia", "bioinformática"],
+      "descricao": "Aluna do CB/UFPE no 4º período. Aprende melhor com diagramas, mapas conceituais e representações visuais de processos biológicos. Conecta conceitos novos a estruturas que já conhece e usa cores e esquemas para memorizar."
     },
     {
       "id": "student_004",
-      "nome": "Pedro Alves",
-      "idade": 15,
-      "nivel": "iniciante",
+      "nome": "Rafael Souza",
+      "idade": 23,
+      "centro": "CTG",
+      "curso": "Engenharia Elétrica",
+      "nivel": "avançado",
       "estilo_aprendizado": "cinestésico",
-      "interesses": ["esportes", "tecnologia"],
-      "descricao": "Aprende fazendo. Prefere exemplos práticos, experimentos e situações do mundo real. Tem dificuldade com teoria abstrata sem aplicação prática."
+      "interesses": ["eletrônica", "energia renovável", "robótica"],
+      "descricao": "Aluno do CTG/UFPE no 7º período. Aprende fazendo: prefere montar circuitos, rodar simulações e resolver problemas aplicados. Tem dificuldade com teoria pura sem um protótipo ou experimento associado. Gosta de desafios que conectam física e programação."
     }
   ]
 }
