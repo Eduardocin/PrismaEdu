@@ -15,10 +15,14 @@ Técnicas aplicadas na v2:
 # CONCEPTUAL
 # ─────────────────────────────────────────────────────────────────────────────
 
-CONCEPTUAL_V1 = "Explique o conceito de '{topic}'."
+CONCEPTUAL_V1 = """\
+Aluno: {nome} | Nível: {nivel}
+
+Explique o conceito de '{topic}' de forma clara e direta.\
+"""
 
 CONCEPTUAL_V2 = """\
-Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
+Aluno: {nome}, {idade} anos | Centro: {centro} | Nível: {nivel} | Estilo: {estilo_aprendizado}
 Dica de adaptação: {style_hint}
 
 Explique o conceito de '{topic}' para este aluno.
@@ -35,10 +39,14 @@ Restrição: responda apenas sobre '{topic}', em português do Brasil, sem inven
 # EXAMPLES
 # ─────────────────────────────────────────────────────────────────────────────
 
-EXAMPLES_V1 = "Dê um exemplo prático de '{topic}'."
+EXAMPLES_V1 = """\
+Aluno: {nome} | Nível: {nivel}
+
+Dê um exemplo prático de '{topic}'.\
+"""
 
 EXAMPLES_V2 = """\
-Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
+Aluno: {nome}, {idade} anos | Centro: {centro} | Nível: {nivel} | Estilo: {estilo_aprendizado}
 Interesses do aluno: {interesses}
 Dica de adaptação: {style_hint}
 
@@ -67,10 +75,14 @@ Restrição: use apenas exemplos reais e funcionais, em português do Brasil.\
 # REFLECTION
 # ─────────────────────────────────────────────────────────────────────────────
 
-REFLECTION_V1 = "Crie 3 perguntas de reflexão sobre '{topic}'."
+REFLECTION_V1 = """\
+Aluno: {nome} | Nível: {nivel}
+
+Crie 3 perguntas de reflexão sobre '{topic}'.\
+"""
 
 REFLECTION_V2 = """\
-Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
+Aluno: {nome}, {idade} anos | Centro: {centro} | Nível: {nivel} | Estilo: {estilo_aprendizado}
 Interesses: {interesses}
 
 Crie perguntas de reflexão sobre '{topic}' que estimulem este aluno a pensar criticamente.
@@ -85,10 +97,14 @@ Restrição: perguntas abertas, sem respostas prontas, em português do Brasil.\
 # VISUAL
 # ─────────────────────────────────────────────────────────────────────────────
 
-VISUAL_V1 = "Crie uma representação visual textual de '{topic}'."
+VISUAL_V1 = """\
+Aluno: {nome} | Nível: {nivel}
+
+Crie uma representação visual textual de '{topic}'.\
+"""
 
 VISUAL_V2 = """\
-Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
+Aluno: {nome}, {idade} anos | Centro: {centro} | Nível: {nivel} | Estilo: {estilo_aprendizado}
 Dica de adaptação: {style_hint}
 
 Crie uma explicação visual e analógica de '{topic}' adaptada para este aluno.

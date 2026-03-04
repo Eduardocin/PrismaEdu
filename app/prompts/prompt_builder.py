@@ -66,6 +66,7 @@ def build_prompt(
         nome=profile.get("nome", ""),
         idade=profile.get("idade", ""),
         nivel=profile.get("nivel", ""),
+        centro=profile.get("centro", ""),
         estilo_aprendizado=profile.get("estilo_aprendizado", ""),
         interesses=interesses_str,
         descricao=profile.get("descricao", ""),
@@ -86,16 +87,26 @@ def build_prompt(
 if __name__ == "__main__":
     from app.profiles.profile_manager import get_profile_by_id
 
-    profile = get_profile_by_id("student_004")  # Pedro — cinestésico/iniciante
-    topic = "variáveis em Python"
+    topic = "loops em programação"
 
-    for version in ["v1", "v2"]:
-        print(f"\n{'='*60}")
-        print(f"  TIPO: conceptual | VERSÃO: {version}")
-        print(f"{'='*60}")
-        system, prompt, schema = build_prompt(profile, topic, "conceptual", version)
-        if system:
-            print(f"[SYSTEM]\n{system}\n")
-        print(f"[PROMPT]\n{prompt}")
-        if schema:
-            print(f"\n[OUTPUT SCHEMA]\n{schema.model_json_schema()}")
+    # Comparação: Lucas (CIn, intermediário, leitura-escrita) vs Thiago (CAC, iniciante, visual)
+    students = [
+        ("student_001", "Lucas Ferreira — CIn / intermediário / leitura-escrita"),
+        ("student_005", "Thiago Mendonça — CAC / iniciante / visual"),
+    ]
+
+    for student_id, label in students:
+        profile = get_profile_by_id(student_id)
+        print(f"\n{'#'*70}")
+        print(f"  ALUNO: {label}")
+        print(f"{'#'*70}")
+        for version in ["v1", "v2"]:
+            print(f"\n{'='*60}")
+            print(f"  TIPO: conceptual | VERSÃO: {version}")
+            print(f"{'='*60}")
+            system, prompt, schema = build_prompt(profile, topic, "conceptual", version)
+            if system:
+                print(f"[SYSTEM]\n{system}\n")
+            print(f"[PROMPT]\n{prompt}")
+            if schema:
+                print(f"\n[OUTPUT SCHEMA]\n{schema.model_json_schema()}")
