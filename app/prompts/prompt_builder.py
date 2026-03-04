@@ -66,7 +66,6 @@ def build_prompt(
         nome=profile.get("nome", ""),
         idade=profile.get("idade", ""),
         nivel=profile.get("nivel", ""),
-        centro=profile.get("centro", ""),
         estilo_aprendizado=profile.get("estilo_aprendizado", ""),
         interesses=interesses_str,
         descricao=profile.get("descricao", ""),

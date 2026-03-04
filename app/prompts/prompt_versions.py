@@ -22,7 +22,7 @@ Explique o conceito de '{topic}' de forma clara e direta.\
 """
 
 CONCEPTUAL_V2 = """\
-Aluno: {nome}, {idade} anos | Centro: {centro} | Nível: {nivel} | Estilo: {estilo_aprendizado}
+Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
 Dica de adaptação: {style_hint}
 
 Explique o conceito de '{topic}' para este aluno.
@@ -46,7 +46,7 @@ Dê um exemplo prático de '{topic}'.\
 """
 
 EXAMPLES_V2 = """\
-Aluno: {nome}, {idade} anos | Centro: {centro} | Nível: {nivel} | Estilo: {estilo_aprendizado}
+Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
 Interesses do aluno: {interesses}
 Dica de adaptação: {style_hint}
 
@@ -82,7 +82,7 @@ Crie 3 perguntas de reflexão sobre '{topic}'.\
 """
 
 REFLECTION_V2 = """\
-Aluno: {nome}, {idade} anos | Centro: {centro} | Nível: {nivel} | Estilo: {estilo_aprendizado}
+Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
 Interesses: {interesses}
 
 Crie perguntas de reflexão sobre '{topic}' que estimulem este aluno a pensar criticamente.
@@ -104,7 +104,7 @@ Crie uma representação visual textual de '{topic}'.\
 """
 
 VISUAL_V2 = """\
-Aluno: {nome}, {idade} anos | Centro: {centro} | Nível: {nivel} | Estilo: {estilo_aprendizado}
+Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
 Dica de adaptação: {style_hint}
 
 Crie uma explicação visual e analógica de '{topic}' adaptada para este aluno.
