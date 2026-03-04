@@ -13,7 +13,7 @@ license: mit
 # 🔷 PrismaEdu
 
 Plataforma educativa que gera conteúdo personalizado para alunos usando a **API do Google Gemini**.  
-O conteúdo é adaptado ao perfil de cada aluno — nível, estilo de aprendizado e interesses — por meio de técnicas avançadas de prompt engineering.
+O conteúdo é adaptado ao perfil de cada aluno — nível e estilo de aprendizado — por meio de técnicas avançadas de prompt engineering.
 
 ---
 
@@ -37,11 +37,11 @@ O **Prisma** pega um tópico qualquer (ex: *"decoradores em Python"*) e gera 4 t
 | Tipo | Descrição |
 |---|---|
 | **Conceitual** | Definição + por que importa + passo a passo + resumo |
-| **Exemplos** | Código funcional contextualizado aos interesses do aluno |
+| **Exemplos** | Código funcional contextualizado ao estilo e nível do aluno |
 | **Reflexão** | 3 perguntas críticas em gradação crescente de dificuldade |
 | **Visual** | Analogia do cotidiano + representação textual/ASCII + legenda |
 
-Cada geração é personalizada com base no perfil do aluno (`students.json`) e armazenada localmente com timestamp.
+Cada geração é personalizada com base no perfil digitado pelo usuário na interface e armazenada localmente com timestamp.
 
 ---
 
@@ -49,10 +49,10 @@ Cada geração é personalizada com base no perfil do aluno (`students.json`) e 
 
 ```
 PrismaEdu/
-├── interface.py              # Interface Gradio (entry point da UI)
-├── app.py                    # Entry point para deploy (Hugging Face Spaces)
+├── app.py                    # Entry point (Hugging Face Spaces + execução local)
 ├── requirements.txt
 ├── app/
+│   ├── interface.py          # Interface Gradio (duas abas: Gerador e Comparar Prompts)
 │   ├── generators/           # Um módulo por tipo de conteúdo
 │   │   ├── _base.py          # Pipeline: cache → prompt → API → validação → output
 │   │   ├── conceptual.py
@@ -61,7 +61,7 @@ PrismaEdu/
 │   │   └── visual.py
 │   ├── profiles/
 │   │   ├── profile_manager.py  # Carrega e busca perfis
-│   │   └── students.json       # Dados dos alunos
+│   │   └── students.json       # Vazio — perfis vêm do formulário da interface
 │   ├── prompts/
 │   │   ├── base_prompts.py     # SYSTEM_PERSONA, FORMAT_*, STYLE_HINTS
 │   │   ├── prompt_builder.py   # Monta (system, prompt, schema) dinamicamente
@@ -155,7 +155,7 @@ GEMINI_MODEL=gemini-2.5-flash-lite   # opcional, este é o padrão
 **5. Inicie a interface**
 
 ```bash
-python interface.py
+python app.py
 ```
 
 Acesse em: `http://localhost:7860`
@@ -166,19 +166,20 @@ Acesse em: `http://localhost:7860`
 
 ### Aba — Gerar Conteúdo
 
-1. Selecione o **aluno** no dropdown
+1. Preencha o **perfil do aluno**: nome, idade, nível e estilo de aprendizado
 2. Digite o **tópico** (ex: `funções em Python`, `fotossíntese`, `Segunda Guerra Mundial`)
 3. Escolha o **tipo de conteúdo**: Conceitual / Exemplos / Reflexão / Visual
-4. Selecione a **versão do prompt**: `v1` (básico) ou `v2` (personalizado)
-5. Clique em **✨ Gerar Conteúdo**
+4. Selecione a **versão do prompt**: `Direto` (v1, sem personalização) ou `Personalizado` (v2, com perfil completo)
+5. Clique em **Gerar Conteúdo**
 
-### Aba — Comparar v1 vs v2
+### Aba — Comparar Prompts
 
-Gera o mesmo conteúdo com ambas as versões lado a lado — útil para analisar o impacto das técnicas de prompt engineering.
+Gera o mesmo conteúdo com as duas versões lado a lado — útil para analisar o impacto das técnicas de prompt engineering.
 
-1. Configure aluno, tópico e tipo de conteúdo
-2. Clique em **⚖️ Comparar v1 vs v2**
-3. Veja os resultados em colunas paralelas
+1. Preencha o **perfil do aluno** (nome, idade, nível, estilo)
+2. Informe o **tópico** e o **tipo de conteúdo**
+3. Clique em **Comparar: Prompt Direto vs Personalizado**
+4. Veja os resultados em colunas paralelas
 
 ---
 
@@ -273,7 +274,7 @@ O HF Spaces detecta automaticamente o `app.py` na raiz e executa:
 
 ```python
 # app.py — já criado na raiz do projeto
-from interface import build_interface
+from app.interface import build_interface
 
 demo = build_interface()
 

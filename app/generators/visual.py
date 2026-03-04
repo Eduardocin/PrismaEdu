@@ -24,19 +24,3 @@ def generate_visual(
         profile, topic, "visual", version, temperature,
         max_output_tokens=MAX_OUTPUT_TOKENS,
     )
-
-
-if __name__ == "__main__":
-    from app.profiles.profile_manager import get_profile_by_id
-
-    profile = get_profile_by_id("student_003")  # Larissa — auditivo/avançado
-    resultado = generate_visual(profile, "recursividade")
-
-    print(f"Aluno : {profile['nome']}")
-    print(f"Tópico: recursividade\n")
-    if isinstance(resultado, dict):
-        print(resultado["raw"])
-    else:
-        print(f"Analogia           : {resultado.analogy}")
-        print(f"Representação visual:\n{resultado.visual_representation}")
-        print(f"Legenda            : {resultado.legend}")

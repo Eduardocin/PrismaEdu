@@ -1,6 +1,8 @@
 """
 profile_manager.py
-Carrega e busca perfis de alunos a partir do students.json.
+Utilitários para carregar e buscar perfis em students.json.
+O arquivo students.json está vazio por padrão — os perfis são fornecidos
+pelo usuário na interface e montados dinamicamente.
 """
 
 import json
@@ -37,21 +39,3 @@ def list_all_names() -> list[str]:
     return [s["nome"] for s in load_profiles()]
 
 
-if __name__ == "__main__":
-    print("=== Todos os alunos ===")
-    for name in list_all_names():
-        print(f"  - {name}")
-
-    print("\n=== Busca por ID: student_002 ===")
-    profile = get_profile_by_id("student_002")
-    print(f"  {profile}")
-
-    print("\n=== Busca por nome: Larissa Mendes ===")
-    profile = get_profile_by_name("Larissa Mendes")
-    print(f"  Nome   : {profile['nome']}")
-    print(f"  Nível  : {profile['nivel']}")
-    print(f"  Estilo : {profile['estilo_aprendizado']}")
-
-    print("\n=== Busca inexistente ===")
-    profile = get_profile_by_id("student_999")
-    print(f"  Resultado: {profile}")

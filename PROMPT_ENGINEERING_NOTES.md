@@ -41,7 +41,7 @@ Use linguagem clara, exemplos concretos e incentive a curiosidade."
 
 **O que é:** Injeção do perfil completo do aluno no início de cada prompt.
 
-**Por que foi escolhida:** Sem contexto, o modelo gera respostas genéricas. Com nome, idade, nível, estilo de aprendizado e interesses, o Gemini adapta vocabulário, profundidade e exemplos automaticamente — a mesma explicação de "recursividade" para um iniciante de 14 anos é radicalmente diferente da de um avançado de 19 anos.
+**Por que foi escolhida:** Sem contexto, o modelo gera respostas genéricas. Com nome, idade, nível e estilo de aprendizado fornecidos pelo usuário na interface, o Gemini adapta vocabulário, profundidade e exemplos automaticamente — a mesma explicação de “recursividade” para um iniciante de 14 anos é radicalmente diferente da de um avançado de 19 anos.
 
 **Campos injetados:**
 | Campo | Efeito no output |
@@ -50,8 +50,7 @@ Use linguagem clara, exemplos concretos e incentive a curiosidade."
 | `idade` | Calibra maturidade dos exemplos |
 | `nivel` | Define profundidade técnica |
 | `estilo_aprendizado` | Direciona o formato da explicação |
-| `interesses` | Ancora analogias e exemplos |
-| `descricao` | Instrução fina sobre dificuldades específicas |
+| `descricao` | Instrução fina sobre dificuldades específicas (vazio por padrão) |
 
 ---
 
@@ -115,7 +114,7 @@ Isso elimina respostas em prosa livre, garante campos previsíveis e permite ren
 | Dimensão | v1 | v2 |
 |---|---|---|
 | System instruction | Vazia (`""`) | `SYSTEM_PERSONA` completa |
-| Contexto do aluno | Ausente | Nome, nível, estilo, interesses, descrição |
+| Contexto do aluno | Ausente | Nome, nível, estilo, descrição |
 | Técnica principal | Nenhuma | CoT / Few-Shot / Style Hint (por tipo) |
 | Formato da resposta | Livre (prosa) | `FORMAT_*` + Output Schema Pydantic |
 | Restrições | Nenhuma | Inline restrictions ao final |
@@ -208,7 +207,7 @@ Dê um exemplo prático de 'listas em Python'.
 
 ```
 Aluno: Pedro Alves, 15 anos | Nível: iniciante | Estilo: cinestésico
-Interesses do aluno: esportes, tecnologia
+
 Dica de adaptação: Use exemplos práticos, situações do mundo real e exercícios aplicados.
 
 Crie um exemplo prático de 'listas em Python' personalizado para este aluno.
@@ -226,14 +225,14 @@ O que cada parte faz:
 Variação: tente calcular apenas a maior nota.
 ---
 
-Agora crie um exemplo diferente sobre 'listas em Python', conectando com os interesses do aluno.
+Agora crie um exemplo diferente sobre 'listas em Python', adaptado ao estilo cinesticósico deste aluno.
 Restrição: use apenas exemplos reais e funcionais, em português do Brasil.
 ```
 
 ### Diferença observada v1 → v2
 
 - **v1** gera um exemplo genérico (geralmente `frutas = ["maçã", "banana"]`), sem conexão com o aluno.
-- **v2** ancora o exemplo nos interesses do Pedro (esportes/tecnologia), usa código funcional com explicação linha a linha e propõe uma variação para fixação — padrão didático consistente com o few-shot injetado.
+- **v2** usa código funcional com explicação linha a linha e propõe uma variação para fixação — padrão didático consistente com o few-shot injetado.
 
 ---
 
@@ -253,11 +252,10 @@ Crie 3 perguntas de reflexão sobre 'estruturas de repetição'.
 
 ```
 Aluno: Carlos Eduardo, 17 anos | Nível: intermediário | Estilo: leitura-escrita
-Interesses: história, filosofia
 
 Crie perguntas de reflexão sobre 'estruturas de repetição' que estimulem este aluno
-a pensar criticamente. As perguntas devem conectar o tema com a realidade e os interesses
-do aluno.
+a pensar criticamente.
+As perguntas devem conectar o tema com a realidade e o dia a dia do aluno.
 
 Gere exatamente 3 perguntas de reflexão numeradas.
 Gradação: a primeira pergunta deve ser mais simples, a última mais desafiadora.
@@ -267,7 +265,7 @@ Restrição: perguntas abertas, sem respostas prontas, em português do Brasil.
 ### Diferença observada v1 → v2
 
 - **v1** gera 3 perguntas técnicas genéricas ("O que é um loop `for`?").
-- **v2** gera perguntas em gradação crescente, conectando com os interesses do Carlos (história, filosofia): da aplicação prática até questões de reflexão filosófica sobre repetição e automação na sociedade.
+- **v2** gera perguntas em gradação crescente, da aplicação prática até questões de reflexão filosófica sobre repetição e automação na sociedade.
 
 ---
 
@@ -315,7 +313,7 @@ Restrição: use apenas analogias do cotidiano, sem termos técnicos não explic
 |---|---|---|
 | Personalização ao aluno | ✗ Nenhuma | ✓ Alta (perfil completo) |
 | Consistência de formato | ✗ Livre | ✓ Estruturado (Pydantic) |
-| Qualidade dos exemplos | ✗ Genéricos | ✓ Ancorados nos interesses |
+| Qualidade dos exemplos | ✗ Genéricos | ✓ Adaptados ao nível e estilo |
 | Profundidade adequada ao nível | ✗ Fixa | ✓ Adaptada (iniciante→avançado) |
 | Conectividade com o cotidiano | ✗ Técnico | ✓ Analogias personalizadas |
 | Gradação de dificuldade | ✗ Ausente | ✓ Presente (reflection) |
@@ -345,6 +343,3 @@ Cada generator define um limite explícito de `max_output_tokens` repassado à A
 
 O parâmetro flui por: `generator` → `_base.run_generator()` → `gemini_client.generate()` → `GenerateContentConfig(max_output_tokens=...)`.
 
-## Lições Aprendidas
-
-*(Preencher conforme o projeto evolui)*

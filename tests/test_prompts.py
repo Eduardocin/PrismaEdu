@@ -21,7 +21,6 @@ def profile_fixture():
         "idade": 16,
         "nivel": "intermediário",
         "estilo_aprendizado": "visual",
-        "interesses": ["tecnologia", "jogos"],
         "descricao": "Aprende bem com exemplos visuais e práticos.",
     }
 

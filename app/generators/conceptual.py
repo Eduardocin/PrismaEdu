@@ -25,23 +25,3 @@ def generate_conceptual(
         profile, topic, "conceptual", version, temperature,
         max_output_tokens=MAX_OUTPUT_TOKENS,
     )
-
-
-if __name__ == "__main__":
-    import json
-    from app.profiles.profile_manager import get_profile_by_id
-
-    profile = get_profile_by_id("student_001")  # Ana Beatriz — visual/iniciante
-    resultado = generate_conceptual(profile, "funções em Python")
-
-    print(f"Aluno : {profile['nome']}")
-    print(f"Tópico: funções em Python\n")
-    if isinstance(resultado, dict):
-        print(resultado["raw"])
-    else:
-        print(f"Definição    : {resultado.definition}")
-        print(f"Importância  : {resultado.why_it_matters}")
-        print(f"Passos      :")
-        for i, step in enumerate(resultado.steps, 1):
-            print(f"  {i}. {step}")
-        print(f"Resumo      : {resultado.summary}")
