@@ -220,7 +220,7 @@ O JSON de resposta deve estar sempre completo e fechado.
 
 **Arquivo:** `app/generators/examples.py`  
 **Técnicas v2:** Persona + Context Setting + Few-Shot + Output Formatting + Inline Restrictions  
-**Max tokens:** 400
+**Max tokens:** 1200
 
 ### Prompt v1
 
