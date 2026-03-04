@@ -4,12 +4,33 @@ Função compartilhada por todos os generators.
 Orquestra: cache → prompt_builder → gemini_client → validação Pydantic → cache → output.
 """
 
-import json
-from pydantic import BaseModel, ValidationError
+import re
+from pydantic import BaseModel
 from app.prompts.prompt_builder import build_prompt
 from app.services.gemini_client import generate
 from app.services import cache as cache_service
 from app.storage.output_manager import save as save_output
+
+
+def _is_truncated(raw: str) -> bool:
+    stripped = raw.strip()
+    return not (stripped.endswith("}") or stripped.endswith('}"'))
+
+
+def _safe_parse(raw: str, model_class):
+    if _is_truncated(raw):
+        return {"raw": raw, "truncated": True}
+    try:
+        return model_class.model_validate_json(raw)
+    except Exception:
+        pass
+    match = re.search(r"```json\s*(.*?)\s*```", raw, re.DOTALL)
+    if match:
+        try:
+            return model_class.model_validate_json(match.group(1))
+        except Exception:
+            pass
+    return {"raw": raw, "truncated": False}
 
 
 def run_generator(
@@ -72,27 +93,16 @@ def run_generator(
     if schema is None:
         return {"raw": raw}
 
-    # 5. Validar com Pydantic
-    try:
-        data = json.loads(raw)
-        result = schema.model_validate(data)
-    except json.JSONDecodeError as e:
-        # JSON incompleto = resposta truncada pelo limite de tokens
-        truncated = len(raw) > 0 and not raw.rstrip().endswith("}")
-        hint = " (resposta truncada — limite de tokens atingido)" if truncated else ""
-        raise RuntimeError(
-            f"Falha ao parsear JSON do Gemini para '{content_type}'{hint}: {e}\n"
-            f"Resposta bruta: {raw[:400]}"
-        ) from e
-    except ValidationError as e:
-        raise RuntimeError(
-            f"Falha ao validar resposta do Gemini para '{content_type}': {e}\n"
-            f"Resposta bruta: {raw[:400]}"
-        ) from e
+    # 5. Parsear e validar com Pydantic (com detecção de truncamento)
+    result = _safe_parse(raw, schema)
+
+    # Se retornou dict (truncado ou parse falhou), não persiste
+    if isinstance(result, dict):
+        return result
 
     # 6. Salvar no cache
     if use_cache and version == "v2":
-        cache_service.set(student_id, topic, content_type, version, data)
+        cache_service.set(student_id, topic, content_type, version, result.model_dump())
 
     # 7. Persistir output
     if save and version == "v2":
