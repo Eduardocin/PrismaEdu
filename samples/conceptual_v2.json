@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-04T15:45:01.000416",
+    "student": {
+      "nome": "Eduardo",
+      "idade": 20,
+      "nivel": "intermediario",
+      "estilo_aprendizado": "visual"
+    },
+    "topic": "fotossintese",
+    "content_type": "conceptual",
+    "prompt_version": "v2"
+  },
+  "prompt_used": "Aluno: Eduardo, 20 anos | Nível: intermediario | Estilo: visual\nDica de adaptação: Use diagramas textuais, tabelas, listas e representações visuais.\n\nExplique o conceito de 'fotossintese' para este aluno.\n\nAntes de responder, pense em voz alta: o que o aluno já deve saber? Quais obstáculos ele pode ter? Como tornar isso concreto para ele?\n\nEstruture a resposta com:\n1. Definição simples (1-2 frases)\n2. Por que isso importa\n3. Explicação passo a passo\n4. Resumo final\n\nAdapte a linguagem ao nível intermediario e ao estilo visual.\nRestrição: responda apenas sobre 'fotossintese', em português do Brasil, sem inventar fatos.\n\nSeja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.",
+  "result": {
+    "definition": "A fotossíntese é o processo pelo qual as plantas, algas e algumas bactérias usam a luz solar, água e dióxido de carbono para criar seu próprio alimento (glicose) e liberar oxigênio. É como a \"cozinha\" das plantas, onde elas transformam ingredientes simples em energia.",
+    "why_it_matters": "A fotossíntese é fundamental para a vida na Terra! Ela produz o oxigênio que respiramos e é a base da cadeia alimentar, fornecendo energia para quase todos os seres vivos, direta ou indiretamente. Sem ela, o ar que respiramos e o alimento que comemos não existiriam como conhecemos.",
+    "steps": [
+      "**1. Captação de Luz e Ingredientes:** As plantas possuem estruturas chamadas cloroplastos (dentro das células das folhas), que contêm clorofila (o pigmento verde). A clorofila age como uma antena, capturando a energia da luz solar. Ao mesmo tempo, as raízes absorvem água (H₂O) do solo e as folhas captam dióxido de carbono (CO₂) do ar através de pequenos poros chamados estômatos.",
+      "**2. Transformação Química (Fase Clara e Fase Escura):**",
+      "   *   **Fase Clara (Dependente de Luz):** Dentro dos cloroplastos, a energia luminosa capturada pela clorofila é usada para \"quebrar\" as moléculas de água (H₂O). Isso libera oxigênio (O₂) para a atmosfera e gera moléculas de energia (ATP e NADPH).",
+      "   *   **Fase Escura (Independente de Luz/Ciclo de Calvin):** Usando a energia (ATP e NADPH) produzida na fase clara, a planta combina o dióxido de carbono (CO₂) com outras moléculas para construir a glicose (C₆H₁₂O₆), que é o \"açúcar\" (alimento) da planta.",
+      "**3. Produção e Armazenamento:** A glicose produzida serve como fonte de energia para o crescimento e as atividades da planta. O excesso de glicose pode ser armazenado na forma de amido para uso futuro ou usado para construir outras partes da planta, como caules e frutos."
+    ],
+    "summary": "Em resumo, a fotossíntese é um processo vital onde as plantas usam luz, água e CO₂ para fabricar seu alimento (glicose) e liberar o oxigênio essencial para a vida. Visualize assim:\n\n```\n[LUZ SOLAR] + [ÁGUA (H₂O)] + [DIÓXIDO DE CARBONO (CO₂)]\n      ↓\n      ↓ (Cloroplastos/Clorofila)\n      ↓\n[GLICOSE (C₆H₁₂O₆)] + [OXIGÊNIO (O₂)]\n```\n\nÉ a base da nossa respiração e alimentação!"
+  }
+}

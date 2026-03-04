@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-04T15:44:58.255394",
+    "student": {
+      "nome": "Eduardo",
+      "idade": 20,
+      "nivel": "intermediario",
+      "estilo_aprendizado": "visual"
+    },
+    "topic": "fotossintese",
+    "content_type": "conceptual",
+    "prompt_version": "v1"
+  },
+  "prompt_used": "Aluno: Eduardo | Nível: intermediario\n\nExplique o conceito de 'fotossintese' de forma clara e direta.\n\nSeja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.",
+  "result": {
+    "raw": "```json\n{\n  \"aluno\": \"Eduardo\",\n  \"nivel\": \"intermediario\",\n  \"conceito\": {\n    \"titulo\": \"Fotossíntese: A Fábrica de Alimento das Plantas\",\n    \"explicacao\": \"A fotossíntese é o processo fundamental pelo qual plantas, algas e algumas bactérias convertem energia luminosa em energia química, na forma de açúcares (glicose). É essencial para a vida na Terra, pois produz o oxigênio que respiramos e o alimento que sustenta a maioria dos ecossistemas.\",\n    \"componentes_chave\": [\n      {\n        \"nome\": \"Energia Luminosa\",\n        \"descricao\": \"A luz do sol é a fonte primária de energia. As plantas capturam essa luz através de um pigmento verde chamado clorofila, encontrado nas folhas.\"\n      },\n      {\n        \"nome\": \"Dióxido de Carbono (CO2)\",\n        \"descricao\": \"Um gás presente na atmosfera, absorvido pelas plantas através de pequenas aberturas nas folhas chamadas estômatos.\"\n      },\n      {\n        \"nome\": \"Água (H2O)\",\n        \"descricao\": \"Absorvida pelas raízes do solo e transportada até as folhas.\"\n      },\n      {\n        \"nome\": \"Clorofila\",\n        \"descricao\": \"O pigmento verde que atua como um 'coletor' de luz solar. É o responsável pela cor verde das plantas.\"\n      }\n    ],\n    \"processo_simplificado\": [\n      \"1. A clorofila nas folhas captura a energia da luz solar.\",\n      \"2. Essa energia é usada para quebrar as moléculas de água (H2O).\",\n      \"3. O dióxido de carbono (CO2) do ar é combinado com os componentes da água.\",\n      \"4. O resultado é a produção de glicose (um tipo de açúcar), que serve como alimento para a planta.\",\n      \"5. Como subproduto, o oxigênio (O2) é liberado na atmosfera.\"\n    ],\n    \"equacao_geral\": \"6 CO2 (Dióxido de Carbono) + 6 H2O (Água) + Luz Solar → C6H12O6 (Glicose) + 6 O2 (Oxigênio)\",\n    \"importancia\": [\n      \"Produção de oxigênio para a respiração de animais e humanos.\",\n      \"Base da cadeia alimentar, fornecendo energia para todos os seres vivos.\",\n      \"Remoção de dióxido de carbono da atmosfera, ajudando a regular o clima.\"\n    ]\n  }\n}\n```"
+  }
+}

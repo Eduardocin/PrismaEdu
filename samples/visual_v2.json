@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-04T15:45:03.699176",
+    "student": {
+      "nome": "Eduardo",
+      "idade": 20,
+      "nivel": "intermediario",
+      "estilo_aprendizado": "visual"
+    },
+    "topic": "fotossintese",
+    "content_type": "visual",
+    "prompt_version": "v2"
+  },
+  "prompt_used": "Aluno: Eduardo, 20 anos | Nível: intermediario | Estilo: visual\nDica de adaptação: Use diagramas textuais, tabelas, listas e representações visuais.\n\nCrie uma explicação visual e analógica de 'fotossintese' adaptada para este aluno.\n\nEstruture a resposta com:\n1. Analogia do cotidiano\n2. Representação textual (tabela, lista hierárquica ou ASCII)\n3. Legenda explicativa\n\nA analogia deve usar algo familiar para um jovem de 20 anos no nível intermediario.\nAdapte a analogia para o estilo visual do aluno.\nA analogia deve ter no máximo 3 frases curtas.\nRestrição: use apenas analogias do cotidiano, sem termos técnicos não explicados, em português do Brasil.\n\nRegras para o diagrama ASCII:\n- O diagrama ASCII deve ter no máximo 8 linhas\n- Cada linha deve ter no máximo 60 caracteres\n- Use setas simples: -->, |, v, ^\n- Não use caixas complexas com bordas duplas\n- O campo visual_representation deve estar completo e fechado\n\nSeja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.",
+  "result": {
+    "analogy": "Pense na fotossíntese como a receita secreta de um chef famoso para fazer um bolo delicioso. A planta (o chef) usa ingredientes simples como luz do sol (energia do forno), água (leite) e gás carbônico (farinha) para criar seu próprio alimento (o bolo), liberando oxigênio (o aroma gostoso que sai do forno) como um bônus.",
+    "visual_representation": "----------------------------------------\n| Luz Solar (Energia) --> Folha da Planta |\n----------------------------------------\n          |\n          v\n  --------------------------------------\n  | Gás Carbônico + Água --> Cloroplasto |\n  --------------------------------------\n          |\n          v\n  --------------------------------------\n  | Glicose (Açúcar/Alimento) + Oxigênio |\n  --------------------------------------",
+    "legend": "A 'Luz Solar' fornece a energia necessária. A 'Folha da Planta' é onde a mágica acontece. O 'Gás Carbônico' e a 'Água' são os ingredientes básicos. O 'Cloroplasto' é a 'cozinha' dentro da folha onde tudo é processado. O resultado final é a 'Glicose', o alimento da planta, e o 'Oxigênio', que liberamos para respirar."
+  }
+}

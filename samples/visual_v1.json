@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-04T15:45:01.994051",
+    "student": {
+      "nome": "Eduardo",
+      "idade": 20,
+      "nivel": "intermediario",
+      "estilo_aprendizado": "visual"
+    },
+    "topic": "fotossintese",
+    "content_type": "visual",
+    "prompt_version": "v1"
+  },
+  "prompt_used": "Aluno: Eduardo | Nível: intermediario\n\nCrie uma representação visual textual de 'fotossintese'.\n\nRegras para o diagrama ASCII:\n- O diagrama ASCII deve ter no máximo 8 linhas\n- Cada linha deve ter no máximo 60 caracteres\n- Use setas simples: -->, |, v, ^\n- Não use caixas complexas com bordas duplas\n- O campo visual_representation deve estar completo e fechado\n\nSeja objetivo e conciso. Limite sua resposta a no máximo 600 palavras. Prefira listas curtas a parágrafos longos. O JSON de resposta deve estar sempre completo e fechado.",
+  "result": {
+    "raw": "```json\n{\n  \"aluno\": \"Eduardo\",\n  \"nivel\": \"intermediario\",\n  \"conceito\": \"Fotossíntese\",\n  \"visual_representation\": [\n    \"      LUZ SOLAR (ENERGIA)      \",\n    \"          v v v v v v          \",\n    \"  CO2 --> Folha --> Glicose    \",\n    \"          ^       ^            \",\n    \"          |       |            \",\n    \"      AGUA (H2O) --> OXIGÊNIO  \",\n    \"                               \",\n    \"       (Processo Essencial)    \"\n  ]\n}\n```"
+  }
+}
