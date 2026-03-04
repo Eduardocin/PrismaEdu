@@ -7,7 +7,7 @@ from app.generators._base import run_generator
 from app.prompts.schemas import ExamplesResponse
 
 
-MAX_OUTPUT_TOKENS = 800
+MAX_OUTPUT_TOKENS = 1200
 
 
 def generate_examples(

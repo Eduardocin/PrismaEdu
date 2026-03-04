@@ -7,7 +7,7 @@ from app.generators._base import run_generator
 from app.prompts.schemas import ReflectionResponse
 
 
-MAX_OUTPUT_TOKENS = 500
+MAX_OUTPUT_TOKENS = 600
 
 
 def generate_reflection(
