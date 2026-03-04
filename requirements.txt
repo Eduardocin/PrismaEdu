@@ -1,14 +1,17 @@
+# ── Produção (instalado no Hugging Face Spaces) ──────────────────────────────
+
 # LLM
-google-genai>=1.0.0
+google-genai>=1.65.0
 
 # Interface
-gradio>=4.0.0
+gradio>=6.8.0
 
 # Utilitários
-python-dotenv>=1.0.0
+python-dotenv>=1.2.2
 
 # Validação de schema
-pydantic>=2.0.0
+pydantic>=2.12.5
 
-# Testes
-pytest>=8.0.0
+# ── Desenvolvimento (local apenas) ───────────────────────────────────────────
+
+pytest>=9.0.2
