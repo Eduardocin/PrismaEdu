@@ -27,20 +27,3 @@ def generate_examples(
     )
 
 
-if __name__ == "__main__":
-    from app.profiles.profile_manager import get_profile_by_id
-
-    profile = get_profile_by_id("student_004")  # Pedro — cinestésico/iniciante
-    resultado = generate_examples(profile, "listas em Python")
-
-    print(f"Aluno : {profile['nome']}")
-    print(f"Tópico: listas em Python\n")
-    if isinstance(resultado, dict):
-        print(resultado["raw"])
-    else:
-        print(f"Contexto    : {resultado.context}")
-        print(f"Exemplo     :\n{resultado.example}")
-        print(f"Explicação  :")
-        for item in resultado.explanation:
-            print(f"  - {item}")
-        print(f"Variação    : {resultado.variation}")

@@ -18,7 +18,6 @@ STUDENT_CONTEXT = (
     "Aluno: {nome}, {idade} anos.\n"
     "Nível: {nivel}.\n"
     "Estilo de aprendizado: {estilo_aprendizado}.\n"
-    "Interesses: {interesses}.\n"
     "Observação: {descricao}\n"
 )
 

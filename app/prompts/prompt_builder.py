@@ -57,7 +57,6 @@ def build_prompt(
 
     template = VERSIONS[content_type][version]
 
-    interesses_str = ", ".join(profile.get("interesses", []))
     style_hint = STYLE_HINTS.get(profile.get("estilo_aprendizado", ""), "")
     format_instruction = _FORMAT_MAP[content_type]
 
@@ -67,7 +66,6 @@ def build_prompt(
         idade=profile.get("idade", ""),
         nivel=profile.get("nivel", ""),
         estilo_aprendizado=profile.get("estilo_aprendizado", ""),
-        interesses=interesses_str,
         descricao=profile.get("descricao", ""),
         style_hint=style_hint,
         format_instruction=format_instruction,

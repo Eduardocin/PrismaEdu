@@ -60,7 +60,6 @@ def _build_profile(nome: str, idade, nivel: str, estilo: str) -> dict:
         "centro": "",
         "nivel": nivel,
         "estilo_aprendizado": estilo,
-        "interesses": [],
         "descricao": "",
     }
 

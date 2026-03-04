@@ -47,7 +47,6 @@ Dê um exemplo prático de '{topic}'.\
 
 EXAMPLES_V2 = """\
 Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
-Interesses do aluno: {interesses}
 Dica de adaptação: {style_hint}
 
 Crie um exemplo prático de '{topic}' personalizado para este aluno.
@@ -66,7 +65,7 @@ O que cada parte faz:
 Variação: tente calcular apenas a maior nota.
 ---
 
-Agora crie um exemplo diferente sobre '{topic}', conectando com os interesses do aluno.
+Agora crie um exemplo diferente sobre '{topic}', adaptado ao estilo {estilo_aprendizado} deste aluno.
 {format_instruction}
 Restrição: use apenas exemplos reais e funcionais, em português do Brasil.\
 """
@@ -83,10 +82,9 @@ Crie 3 perguntas de reflexão sobre '{topic}'.\
 
 REFLECTION_V2 = """\
 Aluno: {nome}, {idade} anos | Nível: {nivel} | Estilo: {estilo_aprendizado}
-Interesses: {interesses}
 
 Crie perguntas de reflexão sobre '{topic}' que estimulem este aluno a pensar criticamente.
-As perguntas devem conectar o tema com a realidade e os interesses do aluno.
+As perguntas devem conectar o tema com a realidade e o dia a dia do aluno.
 
 {format_instruction}
 Gradação: a primeira pergunta deve ser mais simples, a última mais desafiadora.
@@ -110,7 +108,7 @@ Dica de adaptação: {style_hint}
 Crie uma explicação visual e analógica de '{topic}' adaptada para este aluno.
 
 {format_instruction}
-A analogia deve usar algo familiar para um jovem de {idade} anos com interesse em {interesses}.
+A analogia deve usar algo familiar para um jovem de {idade} anos no nível {nivel}.
 Restrição: use apenas analogias do cotidiano, sem termos técnicos não explicados, em português do Brasil.\
 """
 

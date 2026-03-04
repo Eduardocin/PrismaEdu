@@ -32,7 +32,7 @@ def run_generator(
       6. Persiste o output em JSON (se save=True)
 
     Args:
-        profile: Perfil do aluno (dict do students.json).
+        profile: Dicionário com os dados do aluno (nome, idade, nivel, estilo_aprendizado, etc.).
         topic: Tema a ser ensinado.
         content_type: Tipo de conteúdo ('conceptual', 'examples', 'reflection', 'visual').
         version: Versão do prompt ('v1' ou 'v2').

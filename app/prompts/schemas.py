@@ -34,7 +34,7 @@ class ReflectionResponse(BaseModel):
 
 class VisualResponse(BaseModel):
     """Schema para representação visual e analógica."""
-    analogy: str = Field(description="Analogia do cotidiano conectada aos interesses do aluno")
+    analogy: str = Field(description="Analogia do cotidiano adaptada ao nível e estilo do aluno")
     visual_representation: str = Field(
         description="Representação textual: tabela, lista hierárquica ou diagrama ASCII"
     )
