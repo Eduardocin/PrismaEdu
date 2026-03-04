@@ -5,7 +5,7 @@ Orquestra: cache → prompt_builder → gemini_client → validação Pydantic �
 """
 
 from pydantic import BaseModel
-from app.generators._parsers import _is_truncated, _safe_parse
+from app.generators._parsers import _safe_parse
 from app.prompts.prompt_builder import build_prompt
 from app.services.gemini_client import generate
 from app.services import cache as cache_service
