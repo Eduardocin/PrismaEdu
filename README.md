@@ -121,7 +121,7 @@ Interface → generator → _base.run_generator()
 **1. Clone o repositório**
 
 ```bash
-git clone https://github.com/seu-usuario/PrismaEdu.git
+git clone https://github.com/Eduardocin/PrismaEdu.git
 cd PrismaEdu
 ```
 
