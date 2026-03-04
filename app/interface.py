@@ -254,7 +254,6 @@ def build_interface() -> gr.Blocks:
 
                 _profile_inputs = [txt_nome, num_idade, dd_nivel, dd_estilo]
 
-
                 btn_generate.click(
                     fn=generate_content,
                     inputs=_profile_inputs + [txt_topic, dd_content, dd_version],

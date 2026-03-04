@@ -46,6 +46,7 @@ def mock_google_genai(monkeypatch):
     """
     try:
         from google import genai  # noqa: F401
+
         # Pacote real disponível — não precisa de mock
         if not os.getenv("GEMINI_API_KEY"):
             monkeypatch.setenv("GEMINI_API_KEY", "test-key-mock")
@@ -66,12 +67,28 @@ def mock_google_genai(monkeypatch):
         import gradio  # noqa: F401
     except ImportError:
         gradio_mock = types.ModuleType("gradio")
-        for _attr in ("Blocks", "Row", "Column", "Tabs", "TabItem",
-                      "Textbox", "Number", "Dropdown", "Button",
-                      "Markdown", "HTML"):
-            setattr(gradio_mock, _attr, type(_attr, (), {"__init__": lambda s, *a, **k: None}))
+        for _attr in (
+            "Blocks",
+            "Row",
+            "Column",
+            "Tabs",
+            "TabItem",
+            "Textbox",
+            "Number",
+            "Dropdown",
+            "Button",
+            "Markdown",
+            "HTML",
+        ):
+            setattr(
+                gradio_mock,
+                _attr,
+                type(_attr, (), {"__init__": lambda s, *a, **k: None}),
+            )
         monkeypatch.setitem(sys.modules, "gradio", gradio_mock)
-        monkeypatch.setitem(sys.modules, "gradio.components", types.ModuleType("gradio.components"))
+        monkeypatch.setitem(
+            sys.modules, "gradio.components", types.ModuleType("gradio.components")
+        )
 
     google_mod, genai_mod, types_mod = _build_google_genai_mock()
 

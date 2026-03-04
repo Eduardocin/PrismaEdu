@@ -24,6 +24,7 @@ class TestSafeParse:
     @pytest.fixture
     def conceptual_schema(self):
         from app.prompts.schemas import ConceptualResponse
+
         return ConceptualResponse
 
     def test_json_truncado_retorna_truncated_true(self, conceptual_schema):
@@ -49,7 +50,9 @@ class TestSafeParse:
         }"""
         result = _safe_parse(raw, conceptual_schema)
 
-        assert not isinstance(result, dict), "Deve retornar instância Pydantic, não dict"
+        assert not isinstance(result, dict), (
+            "Deve retornar instância Pydantic, não dict"
+        )
         assert result.definition == "Processo de converter luz em energia."
 
     def test_json_em_bloco_markdown_e_parseado(self, conceptual_schema):
@@ -70,7 +73,9 @@ class TestSafeParse:
         assert not isinstance(result, dict), "Fallback deve retornar instância Pydantic"
         assert result.definition == "Definição via fallback."
 
-    def test_json_invalido_sem_truncamento_retorna_truncated_false(self, conceptual_schema):
+    def test_json_invalido_sem_truncamento_retorna_truncated_false(
+        self, conceptual_schema
+    ):
         """Texto que não é JSON e não é truncado deve retornar truncated=False."""
         from app.generators._parsers import _safe_parse
 
@@ -167,14 +172,21 @@ class TestVisualPromptConstraints:
         from app.prompts.prompt_versions import VISUAL_V2
 
         assert "3 frases curtas" in VISUAL_V2
-        assert "estilo_aprendizado" in VISUAL_V2 or "estilo {estilo_aprendizado}" in VISUAL_V2
+        assert (
+            "estilo_aprendizado" in VISUAL_V2
+            or "estilo {estilo_aprendizado}" in VISUAL_V2
+        )
 
     def test_todos_prompts_contem_restricao_conciseness(self):
         from app.prompts.prompt_versions import (
-            CONCEPTUAL_V1, CONCEPTUAL_V2,
-            EXAMPLES_V1, EXAMPLES_V2,
-            REFLECTION_V1, REFLECTION_V2,
-            VISUAL_V1, VISUAL_V2,
+            CONCEPTUAL_V1,
+            CONCEPTUAL_V2,
+            EXAMPLES_V1,
+            EXAMPLES_V2,
+            REFLECTION_V1,
+            REFLECTION_V2,
+            VISUAL_V1,
+            VISUAL_V2,
         )
 
         frase = "JSON de resposta deve estar sempre completo e fechado"
@@ -201,16 +213,20 @@ class TestMaxOutputTokens:
 
     def test_conceptual_max_tokens(self):
         from app.generators.conceptual import MAX_OUTPUT_TOKENS
+
         assert MAX_OUTPUT_TOKENS == 1000
 
     def test_examples_max_tokens(self):
         from app.generators.examples import MAX_OUTPUT_TOKENS
+
         assert MAX_OUTPUT_TOKENS == 1200
 
     def test_reflection_max_tokens(self):
         from app.generators.reflection import MAX_OUTPUT_TOKENS
+
         assert MAX_OUTPUT_TOKENS == 600
 
     def test_visual_max_tokens(self):
         from app.generators.visual import MAX_OUTPUT_TOKENS
+
         assert MAX_OUTPUT_TOKENS == 1200
