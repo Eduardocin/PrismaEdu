@@ -6,7 +6,7 @@ Gerador de explicações visuais e analógicas.
 from app.generators._base import run_generator
 from app.prompts.schemas import VisualResponse
 
-MAX_OUTPUT_TOKENS = 400
+MAX_OUTPUT_TOKENS = 1200
 
 
 def generate_visual(

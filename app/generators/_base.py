@@ -76,10 +76,18 @@ def run_generator(
     try:
         data = json.loads(raw)
         result = schema.model_validate(data)
-    except (json.JSONDecodeError, ValidationError) as e:
+    except json.JSONDecodeError as e:
+        # JSON incompleto = resposta truncada pelo limite de tokens
+        truncated = len(raw) > 0 and not raw.rstrip().endswith("}")
+        hint = " (resposta truncada — limite de tokens atingido)" if truncated else ""
+        raise RuntimeError(
+            f"Falha ao parsear JSON do Gemini para '{content_type}'{hint}: {e}\n"
+            f"Resposta bruta: {raw[:400]}"
+        ) from e
+    except ValidationError as e:
         raise RuntimeError(
             f"Falha ao validar resposta do Gemini para '{content_type}': {e}\n"
-            f"Resposta bruta: {raw[:300]}"
+            f"Resposta bruta: {raw[:400]}"
         ) from e
 
     # 6. Salvar no cache

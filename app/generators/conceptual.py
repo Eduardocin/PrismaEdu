@@ -7,7 +7,7 @@ from app.generators._base import run_generator
 from app.prompts.schemas import ConceptualResponse
 
 
-MAX_OUTPUT_TOKENS = 600
+MAX_OUTPUT_TOKENS = 1000
 
 
 def generate_conceptual(
