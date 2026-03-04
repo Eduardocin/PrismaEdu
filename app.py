@@ -9,7 +9,7 @@ o load_dotenv() em gemini_client.py é ignorado sem erro quando
 não há arquivo .env, e os os.getenv() funcionam normalmente.
 """
 
-from interface import build_interface
+from app.interface import build_interface
 
 demo = build_interface()
 
