@@ -185,31 +185,23 @@ Gera o mesmo conteúdo com as duas versões lado a lado — útil para analisar 
 
 ## 5. Exemplos de output
 
-### Conceptual — Larissa Mendes / "decoradores em Python" (v2)
+### Conceptual — Eduardo / "fotossíntese" (v2)
 
 ```json
 {
-  "definition": "Decoradores em Python são uma forma elegante de estender ou modificar
-  o comportamento de funções de maneira declarativa, sem alterar seu código-fonte original.",
+  "definition": "A fotossíntese é o processo pelo qual as plantas, algas e algumas bactérias usam a luz solar, água e dióxido de carbono para criar seu próprio alimento (glicose) e liberar oxigênio. É como a \"cozinha\" das plantas, onde elas transformam ingredientes simples em energia.",
 
-  "why_it_matters": "Compreender decoradores é crucial para escrever código Python mais
-  limpo e reutilizável. São amplamente usados em Flask, Django e bibliotecas de ML.",
+  "why_it_matters": "A fotossíntese é fundamental para a vida na Terra! Ela produz o oxigênio que respiramos e é a base da cadeia alimentar, fornecendo energia para quase todos os seres vivos, direta ou indiretamente. Sem ela, o ar que respiramos e o alimento que comemos não existiriam como conhecemos.",
 
   "steps": [
-    "Imagine uma receita de bolo — um decorador é uma instrução extra que você 'cola'
-     na receita sem precisar reescrevê-la...",
-    "A sintaxe @nome_do_decorador é um atalho: @meu_decorador acima de minha_funcao
-     equivale a minha_funcao = meu_decorador(minha_funcao)...",
-    "Exemplo prático: um decorador logar_chamada que imprime mensagens antes e depois
-     de executar a função decorada..."
+    "**1. Captação de Luz e Ingredientes:** As plantas possuem estruturas chamadas cloroplastos (dentro das células das folhas), que contêm clorofila (o pigmento verde). A clorofila age como uma antena, capturando a energia da luz solar. Ao mesmo tempo, as raízes absorvem água (H₂O) do solo e as folhas captam dióxido de carbono (CO₂) do ar através de pequenos poros chamados estômatos."
   ],
 
-  "summary": "Decoradores são funções de ordem superior que 'envelopam' outras funções
-  para adicionar funcionalidades extras de forma limpa e reutilizável."
+  "summary": "Em resumo, a fotossíntese é um processo vital onde as plantas usam luz, água e CO₂ para fabricar seu alimento (glicose) e liberar o oxigênio essencial para a vida."
 }
 ```
 
-> Output completo em [`samples/student_003/conceptual/`](samples/student_003/conceptual/)
+> Output completo em [samples/conceptual_v2.json](samples/conceptual_v2.json)
 
 ---
 
