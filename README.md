@@ -15,6 +15,8 @@ license: mit
 Plataforma educativa que gera conteúdo personalizado para alunos usando a **API do Google Gemini**.  
 O conteúdo é adaptado ao perfil de cada aluno — nível e estilo de aprendizado — por meio de técnicas avançadas de prompt engineering.
 
+→ **Deploy:** [Hugging Face Spaces](https://huggingface.co/spaces/EduardoSantanx/prisma-edu)
+
 ---
 
 ## Sumário
@@ -223,6 +225,7 @@ Documentação completa com exemplos reais de input/output e análise comparativ
 ---
 
 ## 7. Deploy no Hugging Face Spaces
+
 
 ### Pré-requisitos
 
